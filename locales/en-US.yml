@@ -1688,6 +1688,7 @@ _aboutMisskey:
   about: "Misskey is open-source software being developed by syuilo since 2014."
   contributors: "Main contributors"
   allContributors: "All contributors"
+  sourceOriginal: "Source code (Fork origin)"
   source: "Source code"
   translation: "Translate Misskey"
   donate: "Donate to Misskey"

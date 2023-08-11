@@ -1714,6 +1714,7 @@ _aboutMisskey:
   about: "Misskeyはsyuiloによって2014年から開発されている、オープンソースのソフトウェアです。"
   contributors: "コントリビューター"
   allContributors: "全てのコントリビューター"
+  sourceOriginal: "ソースコード (フォーク元)"
   source: "ソースコード"
   translation: "Misskeyを翻訳"
   donate: "Misskeyに寄付"

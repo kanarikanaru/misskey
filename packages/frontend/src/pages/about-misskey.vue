@@ -31,6 +31,11 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div class="_gaps_s">
 						<FormLink to="https://github.com/misskey-dev/misskey" external>
 							<template #icon><i class="ti ti-code"></i></template>
+							{{ i18n.ts._aboutMisskey.sourceOriginal }}
+							<template #suffix>GitHub</template>
+						</FormLink>
+						<FormLink to="https://github.com/kanarikanaru/backspacekey" external>
+							<template #icon><i class="ti ti-code"></i></template>
 							{{ i18n.ts._aboutMisskey.source }}
 							<template #suffix>GitHub</template>
 						</FormLink>
