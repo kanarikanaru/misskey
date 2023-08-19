@@ -56,40 +56,40 @@ dbReplications: false
 # You can configure any number of replicas here
 #dbSlaves:
 #  -
-#    host: 
-#    port: 
-#    db: 
-#    user: 
-#    pass: 
+#    host:
+#    port:
+#    db:
+#    user:
+#    pass:
 #  -
-#    host: 
-#    port: 
-#    db: 
-#    user: 
-#    pass: 
+#    host:
+#    port:
+#    db:
+#    user:
+#    pass:
 
 #   ┌─────────────────────┐
 #───┘ Redis configuration └─────────────────────────────────────
 
 redis:
-  host: redis
+  host: redis1
   port: 6379
   #family: 0  # 0=Both, 4=IPv4, 6=IPv6
   #pass: example-pass
   #prefix: example-prefix
   #db: 1
 
-#redisForPubsub:
-#  host: redis
-#  port: 6379
+redisForPubsub:
+  host: redis2
+  port: 6380
 #  #family: 0  # 0=Both, 4=IPv4, 6=IPv6
 #  #pass: example-pass
 #  #prefix: example-prefix
 #  #db: 1
 
-#redisForJobQueue:
-#  host: redis
-#  port: 6379
+redisForJobQueue:
+  host: redis3
+  port: 6381
 #  #family: 0  # 0=Both, 4=IPv4, 6=IPv6
 #  #pass: example-pass
 #  #prefix: example-prefix
@@ -98,12 +98,12 @@ redis:
 #   ┌───────────────────────────┐
 #───┘ MeiliSearch configuration └─────────────────────────────
 
-#meilisearch:
-#  host: meilisearch
-#  port: 7700
-#  apiKey: ''
-#  ssl: true
-#  index: ''
+meilisearch:
+  host: meilisearch
+  port: 7700
+  apiKey: 'example-meilisearch-master-key'
+  ssl: false
+  index: 'mommiesskey-com'
 
 #   ┌───────────────┐
 #───┘ ID generation └───────────────────────────────────────────
