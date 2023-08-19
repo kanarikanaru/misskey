@@ -6,29 +6,79 @@ services:
     restart: always
     links:
       - db
-      - redis
-#     - meilisearch
+      - redis1
+      - redis2
+      - redis3
+      - meilisearch
     depends_on:
       db:
         condition: service_healthy
-      redis:
+      redis1:
         condition: service_healthy
-    ports:
-      - "3000:3000"
+      redis2:
+        condition: service_healthy
+      redis3:
+        condition: service_healthy
+      meilisearch:
+        condition: service_healthy
+      ports:
+        - "3000:3000"
     networks:
       - internal_network
       - external_network
+
     volumes:
       - ./files:/misskey/files
       - ./.config:/misskey/.config:ro
 
-  redis:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/misskey.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - web
+
+  redis1:
     restart: always
     image: redis:7-alpine
     networks:
       - internal_network
+    ports:
+      - "6379:6379"
     volumes:
-      - ./redis:/data
+      - ./redis1:/data
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 5s
+      retries: 20
+
+  redis2:
+    restart: always
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    ports:
+      - "6380:6379"
+    volumes:
+      - ./redis2:/data
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 5s
+      retries: 20
+
+  redis3:
+    restart: always
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    ports:
+      - "6381:6379"
+    volumes:
+      - ./redis3:/data
     healthcheck:
       test: "redis-cli ping"
       interval: 5s
@@ -48,18 +98,15 @@ services:
       interval: 5s
       retries: 20
 
-#  meilisearch:
-#    restart: always
-#    image: getmeili/meilisearch:v1.1.1
-#    environment:
-#      - MEILI_NO_ANALYTICS=true
-#      - MEILI_ENV=production
-#    env_file:
-#      - .config/meilisearch.env
-#    networks:
-#      - internal_network
-#    volumes:
-#      - ./meili_data:/meili_data
+  meilisearch:
+    restart: always
+    image: getmeili/meilisearch:v1.3.1
+    env_file:
+      - .config/meilisearch.env
+    networks:
+      - internal_network
+    volumes:
+      - ./meili_data:/meili_data
 
 networks:
   internal_network:
