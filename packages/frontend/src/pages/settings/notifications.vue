@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: syuilo and other misskey contributors
+SPDX-License-Identifier: AGPL-3.0-only
+-->
+
 <template>
 <div class="_gaps_m">
 	<FormLink @click="configure"><template #icon><i class="ti ti-settings"></i></template>{{ i18n.ts.notificationSetting }}</FormLink>
@@ -5,6 +10,11 @@
 		<div class="_gaps_m">
 			<FormLink @click="readAllNotifications">{{ i18n.ts.markAsReadAllNotifications }}</FormLink>
 			<FormLink @click="readAllUnreadNotes">{{ i18n.ts.markAsReadAllUnreadNotes }}</FormLink>
+		</div>
+	</FormSection>
+	<FormSection>
+		<div class="_gaps_m">
+			<FormLink @click="testNotification">{{ i18n.ts._notification.sendTestNotification }}</FormLink>
 		</div>
 	</FormSection>
 	<FormSection>
@@ -76,6 +86,10 @@ function onChangeSendReadMessage(v: boolean) {
 		if (!allowButton)	return;
 		allowButton.pushRegistrationInServer = res;
 	});
+}
+
+function testNotification(): void {
+	os.api('notifications/test-notification');
 }
 
 const headerActions = $computed(() => []);

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: syuilo and other misskey contributors
+SPDX-License-Identifier: AGPL-3.0-only
+-->
+
 <template>
 <div class="_gaps_m">
 	<MkSelect v-model="lang">
@@ -35,13 +40,18 @@
 			<div class="_gaps_s">
 				<MkSwitch v-model="showNoteActionsOnlyHover">{{ i18n.ts.showNoteActionsOnlyHover }}</MkSwitch>
 				<MkSwitch v-model="showClipButtonInNoteFooter">{{ i18n.ts.showClipButtonInNoteFooter }}</MkSwitch>
-				<MkSwitch v-model="largeNoteReactions">{{ i18n.ts.largeNoteReactions }}</MkSwitch>
 				<MkSwitch v-model="collapseRenotes">{{ i18n.ts.collapseRenotes }}</MkSwitch>
 				<MkSwitch v-model="advancedMfm">{{ i18n.ts.enableAdvancedMfm }}</MkSwitch>
 				<MkSwitch v-if="advancedMfm" v-model="animatedMfm">{{ i18n.ts.enableAnimatedMfm }}</MkSwitch>
 				<MkSwitch v-model="showGapBetweenNotesInTimeline">{{ i18n.ts.showGapBetweenNotesInTimeline }}</MkSwitch>
 				<MkSwitch v-model="loadRawImages">{{ i18n.ts.loadRawImages }}</MkSwitch>
 				<MkSwitch v-model="useReactionPickerForContextMenu">{{ i18n.ts.useReactionPickerForContextMenu }}</MkSwitch>
+				<MkRadios v-model="reactionsDisplaySize">
+					<template #label>{{ i18n.ts.reactionsDisplaySize }}</template>
+					<option value="small">{{ i18n.ts.small }}</option>
+					<option value="medium">{{ i18n.ts.medium }}</option>
+					<option value="large">{{ i18n.ts.large }}</option>
+				</MkRadios>
 			</div>
 
 			<MkSelect v-model="instanceTicker">
@@ -85,6 +95,8 @@
 				<option value="vertical"><i class="ti ti-carousel-vertical"></i> {{ i18n.ts.vertical }}</option>
 				<option value="horizontal"><i class="ti ti-carousel-horizontal"></i> {{ i18n.ts.horizontal }}</option>
 			</MkRadios>
+
+			<MkButton @click="testNotification">{{ i18n.ts._notification.checkNotificationBehavior }}</MkButton>
 		</div>
 	</FormSection>
 
@@ -164,6 +176,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
+import * as Misskey from 'misskey-js';
 import MkSwitch from '@/components/MkSwitch.vue';
 import MkSelect from '@/components/MkSelect.vue';
 import MkRadios from '@/components/MkRadios.vue';
@@ -180,6 +193,8 @@ import { unisonReload } from '@/scripts/unison-reload';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 import { miLocalStorage } from '@/local-storage';
+import { globalEvents } from '@/events';
+import { claimAchievement } from '@/scripts/achievements';
 
 const lang = ref(miLocalStorage.getItem('lang'));
 const fontSize = ref(miLocalStorage.getItem('fontSize'));
@@ -199,7 +214,7 @@ const overridedDeviceKind = computed(defaultStore.makeGetterSetter('overridedDev
 const serverDisconnectedBehavior = computed(defaultStore.makeGetterSetter('serverDisconnectedBehavior'));
 const showNoteActionsOnlyHover = computed(defaultStore.makeGetterSetter('showNoteActionsOnlyHover'));
 const showClipButtonInNoteFooter = computed(defaultStore.makeGetterSetter('showClipButtonInNoteFooter'));
-const largeNoteReactions = computed(defaultStore.makeGetterSetter('largeNoteReactions'));
+const reactionsDisplaySize = computed(defaultStore.makeGetterSetter('reactionsDisplaySize'));
 const collapseRenotes = computed(defaultStore.makeGetterSetter('collapseRenotes'));
 const reduceAnimation = computed(defaultStore.makeGetterSetter('animation', v => !v, v => !v));
 const useBlurEffectForModal = computed(defaultStore.makeGetterSetter('useBlurEffectForModal'));
@@ -258,6 +273,8 @@ watch([
 	showGapBetweenNotesInTimeline,
 	instanceTicker,
 	overridedDeviceKind,
+	mediaListWithOneImageAppearance,
+	reactionsDisplaySize,
 ], async () => {
 	await reloadAsk();
 });
@@ -288,6 +305,32 @@ function removeEmojiIndex(lang: string) {
 	}
 
 	os.promiseDialog(main());
+}
+
+let smashCount = 0;
+let smashTimer: number | null = null;
+function testNotification(): void {
+	const notification: Misskey.entities.Notification = {
+		id: Math.random().toString(),
+		createdAt: new Date().toUTCString(),
+		isRead: false,
+		type: 'test',
+	};
+
+	globalEvents.emit('clientNotification', notification);
+
+	// セルフ通知破壊 実績関連
+	smashCount++;
+	if (smashCount >= 10) {
+		claimAchievement('smashTestNotificationButton');
+		smashCount = 0;
+	}
+	if (smashTimer) {
+		clearTimeout(smashTimer);
+	}
+	smashTimer = window.setTimeout(() => {
+		smashCount = 0;
+	}, 300);
 }
 
 const headerActions = $computed(() => []);
