@@ -98,7 +98,7 @@ export class SearchService {
 					enabled: false,
 				},
 				pagination: {
-					maxTotalHits: 10000,
+					maxTotalHits: 50000,
 				},
 			});
 		}
