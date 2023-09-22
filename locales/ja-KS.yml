@@ -355,7 +355,6 @@ invite: "来てや"
 driveCapacityPerLocalAccount: "ローカルユーザーはんひとりあたりのドライブ容量"
 driveCapacityPerRemoteAccount: "リモートユーザーはんひとりあたりのドライブ容量"
 inMb: "メガバイト単位"
-iconUrl: "アイコン画像のURL"
 bannerUrl: "バナー画像のURL"
 backgroundImageUrl: "背景画像のURL"
 basicInfo: "基本情報"
@@ -1103,6 +1102,9 @@ forYou: "あんたへ"
 currentAnnouncements: "現在のお知らせやで"
 pastAnnouncements: "過去のお知らせやで"
 youHaveUnreadAnnouncements: "あんたまだこのお知らせ読んどらんやろ。"
+useSecurityKey: "ブラウザまたはデバイスの言う通りに、セキュリティキーまたはパスキーを使ってや。"
+replies: "返事"
+renotes: "Renote"
 _announcement:
   forExistingUsers: "もうおるユーザーのみ"
   forExistingUsersDescription: "有効にすると、このお知らせ作成時点でおるユーザーにのみお知らせが表示されます。無効にすると、このお知らせ作成後にアカウントを作成したユーザーにもお知らせが表示されます。"
@@ -1129,6 +1131,8 @@ _initialAccountSetting:
   laterAreYouSure: "初期設定あとでやり直すん？"
 _serverRules:
   description: "新規登録前に見せる、サーバーの簡潔なルールを設定すんで。内容は使うための決め事の要約とすることを推奨するわ。"
+_serverSettings:
+  iconUrl: "アイコン画像のURL"
 _accountMigration:
   moveFrom: "別のアカウントからこのアカウントに引っ越す"
   moveFromSub: "別のアカウントへエイリアスを作る"
@@ -1693,7 +1697,6 @@ _timelineTutorial:
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
   registerTOTP: "認証アプリの設定はじめる"
-  passwordToTOTP: "パスワードを入れてーや"
   step1: "ほんなら、{a}や{b}とかの認証アプリを使っとるデバイスにインストールしてな。"
   step2: "次に、ここにあるQRコードをアプリでスキャンしてな～。"
   step2Click: "QRコードをクリックすると、今使とる端末に入っとる認証アプリとかキーリングに登録できるで。"
