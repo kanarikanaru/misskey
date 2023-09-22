@@ -332,7 +332,7 @@ export const defaultStore = markRaw(new Storage('base', {
 	},
 	reactionsDisplaySize: {
 		where: 'device',
-		default: 'medium' as 'small' | 'medium' | 'large',
+		default: 'small' as 'small' | 'medium' | 'large',
 	},
 	forceShowAds: {
 		where: 'device',
