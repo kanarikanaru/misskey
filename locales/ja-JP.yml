@@ -719,7 +719,7 @@ lockedAccountInfo: "フォローを承認制にしても、ノートの公開範
 alwaysMarkSensitive: "デフォルトでメディアをセンシティブ設定にする"
 loadRawImages: "添付画像のサムネイルをオリジナル画質にする"
 disableShowingAnimatedImages: "アニメーション画像を再生しない"
-highlightSensitiveMedia: "メディアがセンシティブであることを分かりやすく表示"
+highlightSensitiveMedia: "データセーバー有効時にメディアがセンシティブであることを分かりやすく表示"
 allowReactionsBeams: "ビーム絵文字を原寸大で表示"
 verificationEmailSent: "確認のメールを送信しました。メールに記載されたリンクにアクセスして、設定を完了してください。"
 notSet: "未設定"
