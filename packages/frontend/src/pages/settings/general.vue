@@ -288,6 +288,7 @@ watch([
 	mediaListWithOneImageAppearance,
 	reactionsDisplaySize,
 	highlightSensitiveMedia,
+	allowReactionsBeams,
 	keepScreenOn,
 ], async () => {
 	await reloadAsk();
