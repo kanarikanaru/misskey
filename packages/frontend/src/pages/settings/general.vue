@@ -293,6 +293,7 @@ watch([
 	mediaListWithOneImageAppearance,
 	reactionsDisplaySize,
 	highlightSensitiveMedia,
+	allowReactionsBeams,
 	keepScreenOn,
 	disableStreamingTimeline,
 ], async () => {
