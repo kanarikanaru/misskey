@@ -170,6 +170,9 @@ useTooltip(buttonEl, async (showing) => {
 	}
 }
 
+.icon {
+}
+
 .count {
 	font-size: 0.7em;
 	line-height: 42px;
