@@ -6,7 +6,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 <template>
 <div :class="$style.root" :style="{ zIndex, top: `${y - 64}px`, left: `${x - 64}px` }">
 	<span :class="[$style.text, { [$style.up]: up }]">
-		<MkReactionIcon class="icon" :reaction="reaction" :style="defaultStore.state.allowReactionsBeams ? {} : { 'max-width': '150px' }"/>
+		<MkReactionIcon class="icon" :reaction="reaction"/>
 	</span>
 </div>
 </template>
