@@ -12,7 +12,20 @@
 
 -->
 
+## (unreleased)
+### General
+-
+
+### Client
+-
+
+### Server
+- Fix: お知らせのページネーションが機能しない
+
 ## 2023.9.0 (unreleased)
+
+### Note
+- meilisearchを使用する場合、v1.2以上が必要です
 
 ### General
 - Feat: OAuth 2.0のサポート
@@ -85,6 +98,7 @@
 - Fix: 複数の階層があるメニューで、短くタップすると正常に動かない場合がある問題を修正
 - Fix: アニメーションがオフのとき、スマホで子メニューの選択ができない問題を修正
 - Fix: ドロワーメニューで、親メニュー項目をマウスでホバーすると子メニューが表示されてしまう問題を修正
+- Fix: AiScriptでMk:apiが外部と通信できる問題を修正
 
 ### Server
 - Change: cacheRemoteFilesの初期値はfalseになりました
@@ -95,6 +109,7 @@
 - Enhance: nodeinfo 2.1対応
 - Enhance: 自分へのメンション一覧を取得する際のパフォーマンスを向上
 - Enhance: Docker環境でjemallocを使用することでメモリ使用量を削減
+- Enhance: ID生成方式としてaidxを追加、かつデフォルトに
 - Fix: MK_ONLY_SERVERオプションを指定した際にクラッシュする問題を修正
 - Fix: notes/reactionsのページネーションが機能しない問題を修正
 - Fix: ノート検索 `notes/search` にてhostを指定した際に検索結果に反映されるように
