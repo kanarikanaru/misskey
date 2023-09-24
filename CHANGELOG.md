@@ -12,16 +12,6 @@
 
 -->
 
-## (unreleased)
-### General
--
-
-### Client
--
-
-### Server
-- Fix: お知らせのページネーションが機能しない
-
 ## 2023.9.0 (unreleased)
 
 ### Note
@@ -60,7 +50,7 @@
 - Feat: 新しい実績を追加
 - Enhance: ノート詳細ページでリノート一覧、リアクション一覧タブを追加
 	- ノートのメニューからは当該項目は消えました
-- Enhance: データセーバー有効時にセンシティブなメディアを目立たせる設定を追加
+- Enhance: センシティブなメディアを目立たせる設定を追加
 - Enhance: プロフィールにその人が作ったPlayの一覧出せるように
 - Enhance: メニューのスイッチの動作を改善
 - Enhance: 絵文字ピッカーの検索の表示件数を100件に増加
@@ -82,8 +72,6 @@
 - Enhance: ノート詳細ページ読み込み時のパフォーマンスが向上しました
 - Enhance: タイムラインでリスト/アンテナ選択時のパフォーマンスを改善
 - Enhance: 「Moderation note」、「Add moderation note」をローカライズできるように
-- Enhance: 横幅の長い絵文字をを圧縮して表示するか選べるように
-- Enhance: 検索の最大ヒット数が増加しノートが探しやすく
 - Enhance: プラグインのソースコードを確認・コピーできるように
 - Enhance: 細かなデザインの調整
 - Fix: サーバー情報画面(`/instance-info/{domain}`)でブロックができないのを修正
@@ -138,9 +126,9 @@
 
 ### General
 - 招待機能を改善しました
-  * 過去に発行した招待コードを確認できるようになりました  
-  * ロールごとに招待コードの発行数制限と制限対象期間、有効期限を設定できるようになりました  
-  * 招待コードを作成したユーザーと使用したユーザーを確認できるようになりました  
+	* 過去に発行した招待コードを確認できるようになりました
+	* ロールごとに招待コードの発行数制限と制限対象期間、有効期限を設定できるようになりました
+	* 招待コードを作成したユーザーと使用したユーザーを確認できるようになりました
 - ユーザーにロールが期限付きでアサインされている場合、その期限をユーザーのモデレーションページで確認できるようになりました
 - identicon生成を無効にしてパフォーマンスを向上させることができるようになりました
 - サーバーのマシン情報の公開を無効にしてパフォーマンスを向上させることができるようになりました
@@ -166,7 +154,7 @@
 - コンテキストメニュー表示時のパフォーマンスを改善
 - フォロー/フォロワー非公開時の表示を改善
 - 本文にMFMが含まれている場合に自動でたたまれる機能が、返信先や引用RNにも適用されるように
-  - position は対象外になりました
+	- position は対象外になりました
 - AiScriptを0.15.0に更新
 - Fix: サーバーメトリクスが90度傾いている
 - Fix: 非ログイン時にクレデンシャルが必要なページに行くとエラーが出る問題を修正
@@ -247,7 +235,7 @@
 - Fix: 「アクセストークンの管理」画面でアプリの情報が表示されない問題の修正
 - Fix: Firefoxにおける絵文字ピッカーのTabキーフォーカス問題の修正
 - Fix: フォローボタンがテーマのカラースキームによって視認性が悪くなる問題を修正
-  - 新しいプロパティ `fgOnWhite` が追加されました
+	- 新しいプロパティ `fgOnWhite` が追加されました
 
 ### Server
 - bullをbull-mqにアップグレードし、ジョブキューのパフォーマンスを改善
@@ -300,13 +288,13 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 ### General
 - アカウントの引っ越し（フォロワー引き継ぎ）に対応
 - Meilisearchを全文検索に使用できるようになりました
-  * 「フォロワーのみ」の投稿は検索結果に表示されません。
+	* 「フォロワーのみ」の投稿は検索結果に表示されません。
 - 新規登録前に簡潔なルールをユーザーに表示できる、サーバールール機能を追加
 - ユーザーへの自分用メモ機能
-  * ユーザーに対して、自分だけが見られるメモを追加できるようになりました。  
-    （自分自身に対してもメモを追加できます。）
-  * ユーザーメニューから追加できます。  
-    （デスクトップ表示ではusernameの右側のボタンからも追加可能）
+	* ユーザーに対して、自分だけが見られるメモを追加できるようになりました。  
+		（自分自身に対してもメモを追加できます。）
+	* ユーザーメニューから追加できます。  
+		（デスクトップ表示ではusernameの右側のボタンからも追加可能）
 - チャンネルに色を設定できるようになりました。各ノートに設定した色のインジケーターが表示されます。
 - チャンネルをアーカイブできるようになりました。
 	* アーカイブすると、チャンネル一覧や検索結果に表示されなくなり、新たな書き込みもできなくなります。
@@ -328,9 +316,9 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 - ドライブのファイル一覧から直接ノートを作成できるように
 - ノートメニューからRenoteしたユーザーの一覧を見れるように
 - コントロールパネルのカスタム絵文字ページおよびaboutのカスタム絵文字の検索インプットで、`:emojiname1::emojiname2:`のように検索して絵文字を検索できるように
-  * 絵文字ピッカーから入力可能になります
+	* 絵文字ピッカーから入力可能になります
 - データセーバーモードを追加
-  * 画像が全て隠れた状態で表示されるようになります
+	* 画像が全て隠れた状態で表示されるようになります
 - 閲覧注意設定された画像は表示した状態でもそれが閲覧注意だと分かる表示をするように
 - モデレーターはノートに添付された画像上から直接NSFW設定できるように
 - 1枚だけのメディアリストの画像のアスペクト比を画像に応じて縦長にするように
@@ -359,8 +347,8 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 - 指定したロールを持つユーザーのノートのみが流れるロールタイムラインを追加
 	- Deckのカラムとしても追加可能
 - カスタム絵文字関連の改善
-  * ノートなどに含まれるemojis（populateEmojiの結果）は（プロキシされたURLではなく）オリジナルのURLを指すように
-  * MFMでx3/x4もしくはscale.x/yが2.5以上に指定されていた場合にはオリジナル品質の絵文字を使用するように
+	* ノートなどに含まれるemojis（populateEmojiの結果）は（プロキシされたURLではなく）オリジナルのURLを指すように
+	* MFMでx3/x4もしくはscale.x/yが2.5以上に指定されていた場合にはオリジナル品質の絵文字を使用するように
 - カスタム絵文字でリアクションできないことがある問題を修正
 
 ### Client
@@ -400,7 +388,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### Service Worker
 - 「通知が既読になったらプッシュ通知を削除する」を復活
-  * 「プッシュ通知が更新されました」の挙動を変えた（ホストとバージョンを表示するようにし、一定時間後の削除は行わないように）
+	* 「プッシュ通知が更新されました」の挙動を変えた（ホストとバージョンを表示するようにし、一定時間後の削除は行わないように）
 - プッシュ通知が実績を解除 (achievementEarned) に対応
 - プッシュ通知のアクションから既存のクライアントの投稿フォームを開くことになった際の挙動を修正
 - たくさんのプッシュ通知を閉じた際、その通知の数だけnotifications/mark-all-as-readを叩くのをやめるように
@@ -433,7 +421,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### General
 - チャンネルをお気に入りに登録できるように
-  - タイムラインのアンテナ選択などでは、フォローしているアンテナの代わりにお気に入りしたアンテナが表示されるようになっています。チャンネルをお気に入りに登録するには、当該チャンネルのページ→概要→⭐️のボタンを押します。
+	- タイムラインのアンテナ選択などでは、フォローしているアンテナの代わりにお気に入りしたアンテナが表示されるようになっています。チャンネルをお気に入りに登録するには、当該チャンネルのページ→概要→⭐️のボタンを押します。
 - チャンネルにノートをピン留めできるように
 
 ### Client
@@ -443,10 +431,10 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 - ギャラリー一覧にメディア表示と同じように NSFW 設定を反映するように（ホバーで表示）
 - オブジェクトストレージの設定画面を分かりやすく
 - 広告・お知らせが新規登録時に増殖しないように
--　「にゃああああああああああああああ！！！！！！！！！！！！」 (`isCat`) 有効時にアバターに表示される猫耳について挙動を変更
-  - 「UIにぼかし効果を使用」 (`useBlurEffect`) で次の挙動が有効になります
-	  - 猫耳のアバター内部部分をぼかしでマスク表示してより猫耳っぽく見えるように
-	- 「UIのアニメーションを減らす」 (`reduceAnimation`) で猫耳を撫でられなくなります
+	-　「にゃああああああああああああああ！！！！！！！！！！！！」 (`isCat`) 有効時にアバターに表示される猫耳について挙動を変更
+	- 「UIにぼかし効果を使用」 (`useBlurEffect`) で次の挙動が有効になります
+		- 猫耳のアバター内部部分をぼかしでマスク表示してより猫耳っぽく見えるように
+		- 「UIのアニメーションを減らす」 (`reduceAnimation`) で猫耳を撫でられなくなります
 - Add Minimizing ("folding") of windows
 - 「データセーバー」モードを追加
 - 非NSFWメディアが隠れている際にも「閲覧注意」が出てしまう問題を修正
@@ -467,9 +455,9 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### Changes
 - オブジェクトストレージのリージョン指定が必須になりました
-  - リージョンの指定の無いサービスは us-east-1 を設定してください
-  - 値が空の場合は設定ファイルまたは環境変数の使用を試みます
-    - e.g. ~/aws/config, AWS_REGION
+	- リージョンの指定の無いサービスは us-east-1 を設定してください
+	- 値が空の場合は設定ファイルまたは環境変数の使用を試みます
+		- e.g. ~/aws/config, AWS_REGION
 
 ### General
 - コンディショナルロールの条件に「投稿数が～以下」「投稿数が～以上」を追加
@@ -560,7 +548,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 - ブラウザでメディアプロキシ(/proxy)からファイルを保存した際に、なるべくオリジナルのファイル名を継承するように
 - ドライブの「URLからアップロード」で、content-dispositionのfilenameがあればそれをファイル名に
 - Identiconがローカルとリモートで同じになるように
-  - これまでのIdenticonは異なる画像になります
+	- これまでのIdenticonは異なる画像になります
 - サーバーのパフォーマンスを改善
 
 ### Bugfixes
@@ -698,10 +686,10 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### Improvements
 - MkPageHeaderをごっそり変えた
-  * モバイルではヘッダーは上下に分割され、下段にタブが表示されるように
-  * iconOnlyのタブ項目がアクティブな場合にはタブのタイトルを表示するように
-  * メインタイムラインではタイトルを表示しない
-  * メインタイムラインかつモバイルで表示される左上のアバターを選択するとアカウントメニューが開くように
+	* モバイルではヘッダーは上下に分割され、下段にタブが表示されるように
+	* iconOnlyのタブ項目がアクティブな場合にはタブのタイトルを表示するように
+	* メインタイムラインではタイトルを表示しない
+	* メインタイムラインかつモバイルで表示される左上のアバターを選択するとアカウントメニューが開くように
 - ユーザーページのノート一覧をタブとして分離
 - コンディショナルロールもバッジとして表示可能に
 - enhance(client): ロールをより簡単に付与できるように
@@ -790,8 +778,8 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### Improvements
 - 外部メディアプロキシへの対応を強化しました
-  外部メディアプロキシのFastify実装を作りました
-  https://github.com/misskey-dev/media-proxy
+	外部メディアプロキシのFastify実装を作りました
+	https://github.com/misskey-dev/media-proxy
 - Server: improve performance
 
 ### Bugfixes
@@ -945,7 +933,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 - Elasticsearchのサポートが削除されました
 	- 代わりに今後任意の検索プロバイダを設定できる仕組みを構想しています。その仕組みを使えば今まで通りElasticsearchも利用できます
 - Yarnからpnpmに移行されました
-  corepackの有効化を推奨します: `sudo corepack enable`
+	corepackの有効化を推奨します: `sudo corepack enable`
 - インスタンスブロックはサブドメインにも適用されるようになります
 - ロールの導入に伴い、いくつかの機能がロールと統合されました
 	- モデレーターはロールに統合されました。今までのモデレーター情報は失われるため、予めモデレーター一覧を記録しておき、アップデート後にモデレーターロールを作りアサインし直してください。
@@ -954,7 +942,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 	- インスタンスデフォルトのドライブ容量設定はロールに統合されました。アップデート後、ベースロールもしくはコンディショナルロールでドライブ容量を編集してください。
 	- LTL/GTLの解放状態はロールに統合されました。
 - Dockerの実行をrootで行わないようにしました。Dockerかつオブジェクトストレージを使用していない場合は`chown -hR 991.991 ./files`を実行してください。
-  https://github.com/misskey-dev/misskey/pull/9560
+	https://github.com/misskey-dev/misskey/pull/9560
 
 #### For users
 - ノートのウォッチ機能が削除されました
@@ -967,7 +955,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 	- 0.12.x未満のプラグインは読み込むことはできません
 - iOS15以下のデバイスはサポートされなくなりました
 - Firefox110以下はサポートされなくなりました
-  - 109でもContainerQueriesのフラグを有効にする事で問題なく使用できます
+	- 109でもContainerQueriesのフラグを有効にする事で問題なく使用できます
 
 #### For app developers
 - API: metaのレスポンスに`emojis`プロパティが含まれなくなりました
@@ -1182,7 +1170,7 @@ Meilisearchの設定に`index`が必要になりました。値はMisskeyサー�
 
 ### Bugfixes
 - Fix Docker doesn't work @mei23
-  Still not working on arm64 environment. (See 12.112.0)
+	Still not working on arm64 environment. (See 12.112.0)
 
 ## 12.112.1 (2022/07/07)
 same as 12.112.0
@@ -1224,7 +1212,7 @@ same as 12.112.0
 - Add Badge Image to Push Notification #8012 @tamaina
 - Server: Improve performance
 - Server: Supports IPv6 on Redis transport. @mei23
-  IPv4/IPv6 is used by default. You can tune this behavior via `redis.family`.
+	IPv4/IPv6 is used by default. You can tune this behavior via `redis.family`.
 - Server: Add possibility to log IP addresses of users @syuilo
 - Add additional drive capacity change support @CyberRex0
 
@@ -1264,11 +1252,11 @@ same as 12.112.0
 - API: ユーザー検索で、クエリがusernameの条件を満たす場合はusernameもLIKE検索するように @tamaina
 - MFM: Allow speed changes in all animated MFMs @Johann150
 - The theme color is now better validated. @Johann150
-  Your own theme color may be unset if it was in an invalid format.
-  Admins should check their instance settings if in doubt.
+	Your own theme color may be unset if it was in an invalid format.
+	Admins should check their instance settings if in doubt.
 - Perform port diagnosis at startup only when Listen fails @mei23
 - Rate limiting is now also usable for non-authenticated users. @Johann150 @mei23
-  Admins should make sure the reverse proxy sets the `X-Forwarded-For` header to the original address.
+	Admins should make sure the reverse proxy sets the `X-Forwarded-For` header to the original address.
 
 ### Bugfixes
 - Server: keep file order of note attachement @Johann150
@@ -1327,7 +1315,7 @@ same as 12.112.0
 ### Improvements
 - Webhooks @syuilo
 - Bull Dashboardを組み込み、ジョブキューの確認や操作を行えるように @syuilo
-  - Bull Dashboardを開くには、最初だけ一旦ログアウトしてから再度管理者権限を持つアカウントでログインする必要があります
+	- Bull Dashboardを開くには、最初だけ一旦ログアウトしてから再度管理者権限を持つアカウントでログインする必要があります
 - Check that installed Node.js version fulfills version requirement @ThatOneCalculator
 - Server: overall performance improvements @syuilo
 - Federation: avoid duplicate activity delivery @Johann150
@@ -1340,7 +1328,7 @@ same as 12.112.0
 - API: fix admin/meta endpoint @syuilo
 - API: improved validation and documentation for endpoints that accept different variants of input @Johann150
 - API: `notes/create`: The `mediaIds` property is now deprecated. @Johann150
-  - Use `fileIds` instead, it has the same behaviour.
+	- Use `fileIds` instead, it has the same behaviour.
 - Client: URIエンコーディングが異常でdecodeURIComponentが失敗するとURLが表示できなくなる問題を修正 @tamaina
 
 ## 12.108.1 (2022/03/12)
@@ -1359,9 +1347,9 @@ same as 12.112.0
 ### Changes
 - ノートの最大文字数を設定できる機能が廃止され、デフォルトで一律3000文字になりました @syuilo
 - Misskey can no longer terminate HTTPS connections. @Johann150
-  - If you did not use a reverse proxy (e.g. nginx) before, you will probably need to adjust
-    your configuration file and set up a reverse proxy. The `https` configuration key is no
-    longer recognized!
+	- If you did not use a reverse proxy (e.g. nginx) before, you will probably need to adjust
+		your configuration file and set up a reverse proxy. The `https` configuration key is no
+		longer recognized!
 
 ### Improvements
 - インスタンスデフォルトテーマを設定できるように @syuilo
@@ -1488,7 +1476,7 @@ same as 12.112.0
 - クライアント: サイドビューが動かないのを修正
 - クライアント: ensure that specified users does not get duplicates
 - Add `img-src` and `media-src` directives to `Content-Security-Policy` for
-  files and media proxy
+	files and media proxy
 
 ## 12.102.1 (2022/01/27)
 ### Bugfixes
@@ -1502,9 +1490,9 @@ same as 12.112.0
 
 ### Changes
 - Room機能が削除されました
-  - 後日別リポジトリとして復活予定です
+	- 後日別リポジトリとして復活予定です
 - リバーシ機能が削除されました
-  - 後日別リポジトリとして復活予定です
+	- 後日別リポジトリとして復活予定です
 - Chat UIが削除されました
 - ノートに添付できるファイルの数が16に増えました
 - カスタム絵文字にSVGを指定した場合、PNGに変換されて表示されるようになりました
@@ -1829,7 +1817,7 @@ same as 12.112.0
 
 ### Features
 - ノートの翻訳機能を追加
-  - 有効にするには、サーバー管理者がDeepLの無料アカウントを登録し、取得した認証キーを「インスタンス設定 > その他 > DeepL Auth Key」に設定する必要があります。
+	- 有効にするには、サーバー管理者がDeepLの無料アカウントを登録し、取得した認証キーを「インスタンス設定 > その他 > DeepL Auth Key」に設定する必要があります。
 - Misskey更新時にダイアログを表示するように
 - ジョブキューウィジェットに警報音を鳴らす設定を追加
 
