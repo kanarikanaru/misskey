@@ -384,14 +384,12 @@ export class DriveService {
 			CacheControl: 'max-age=31536000, immutable',
 		} as PutObjectCommandInput;
 
-		//さくらのオブジェクトストレージでは拡張子がないとアップロードできないため拡張子を残す
-		//if (filename) params.ContentDisposition = contentDisposition(
-			//'inline',
+		if (filename) params.ContentDisposition = contentDisposition(
+			'inline',
 			// 拡張子からContent-Typeを設定してそうな挙動を示すオブジェクトストレージ (upcloud?) も存在するので、
 			// 許可されているファイル形式でしか拡張子をつけない
-			//ext ? correctFilename(filename, ext) : filename,
-		//);
-
+			ext ? correctFilename(filename, ext) : filename,
+		);
 		if (meta.objectStorageSetPublicRead) params.ACL = 'public-read';
 
 		await this.s3Service.upload(meta, params)
