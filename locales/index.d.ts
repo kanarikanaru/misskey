@@ -1125,6 +1125,7 @@ export interface Locale {
     "authentication": string;
     "authenticationRequiredToContinue": string;
     "dateAndTime": string;
+    "showRenotes": string;
     "_announcement": {
         "forExistingUsers": string;
         "forExistingUsersDescription": string;
@@ -2278,6 +2279,7 @@ export interface Locale {
         "markSensitiveDriveFile": string;
         "unmarkSensitiveDriveFile": string;
         "resolveAbuseReport": string;
+        "createInvitation": string;
     };
 }
 declare const locales: {
