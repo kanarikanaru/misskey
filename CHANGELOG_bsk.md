@@ -11,6 +11,23 @@
 -
 
 -->
+## 2023.9.1-bsk-1.3
+Misskeyのフォーク元に対する主な変更点は次の通りです。
+次のアップデートでフォーク元に導入される変更を先行導入しました。
+### General
+- Enhance: タイムラインからRenoteを除外するオプションを追加
+- Enhance: ユーザーページのノート一覧でRenoteを除外できるように
+
+### Client
+- Enhance: モデレーションログ機能の強化
+- Enhance: Plugin:register_post_form_actionを用いてCWを取得・変更できるように
+
+### Server
+- Enhance: MasterプロセスのPIDを書き出せるように
+
+
+### Server
+- Fix: お知らせのページネーションが機能しない問題を修正する[本家へのコミット](https://github.com/misskey-dev/misskey/commit/dc8ab01168873c4eafe79eb8002a0028b58758c0)を先行マージ
 
 ## 2023.9.0-bsk-1.2 
 Misskeyのフォーク元に対する主な変更点は次の通りです。
