@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: misskey/misskey
+          images: kanarikanaru/backspacekey
           tags: |
             type=edge
             type=ref,event=pr
