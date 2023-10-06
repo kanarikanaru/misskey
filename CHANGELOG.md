@@ -18,6 +18,7 @@
 
 ### General
 - Enhance: モデレーションログ機能の強化
+- Enhance: 依存関係の更新
 - Fix: ダイレクト投稿をリノートできてしまう
 
 ### Client
