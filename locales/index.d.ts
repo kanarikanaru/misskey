@@ -1131,6 +1131,15 @@ export interface Locale {
     "notificationRecieveConfig": string;
     "mutualFollow": string;
     "fileAttachedOnly": string;
+    "showRepliesToOthersInTimeline": string;
+    "hideRepliesToOthersInTimeline": string;
+    "externalServices": string;
+    "impressum": string;
+    "impressumUrl": string;
+    "impressumDescription": string;
+    "privacyPolicy": string;
+    "privacyPolicyUrl": string;
+    "tosAndPrivacyPolicy": string;
     "_announcement": {
         "forExistingUsers": string;
         "forExistingUsersDescription": string;
