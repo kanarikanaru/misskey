@@ -2298,6 +2298,15 @@ export interface Locale {
         "deleteAd": string;
         "updateAd": string;
     };
+    "_fileViewer": {
+        "title": string;
+        "type": string;
+        "size": string;
+        "url": string;
+        "uploadedAt": string;
+        "attachedNotes": string;
+        "thisPageCanBeSeenFromTheAuthor": string;
+    };
 }
 declare const locales: {
     [lang: string]: Locale;
