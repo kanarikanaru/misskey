@@ -13,6 +13,13 @@
 -->
 
 
+## 2023.09-bsk-2.1 (chimera)
+## Abstract
+Misskeyフォーク元からの機能を導入しました。
+### Client
+- Enhance: TLの返信表示オプションを記憶するように
+
+
 ## 2023.09-bsk-2.0 (chimera)
 ## Abstract
 Misskey 2023.10におけるタイムラインの仕様変更に関わらない部分を2023.09に移植しました。 
