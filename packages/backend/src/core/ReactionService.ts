@@ -142,7 +142,7 @@ export class ReactionService {
 					reaction = FALLBACK;
 				}
 			} else {
-				reaction = this.normalize(reaction ?? null);
+				reaction = this.normalize(reaction);
 			}
 		}
 

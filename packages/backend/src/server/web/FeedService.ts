@@ -81,7 +81,7 @@ export class FeedService {
 				date: note.createdAt,
 				description: note.cw ?? undefined,
 				content: note.text ?? undefined,
-				image: file ? this.driveFileEntityService.getPublicUrl(file) ?? undefined : undefined,
+				image: file ? this.driveFileEntityService.getPublicUrl(file) : undefined,
 			});
 		}
 
