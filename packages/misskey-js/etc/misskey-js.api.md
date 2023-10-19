@@ -2995,6 +2995,8 @@ type UserLite = {
         faviconUrl: Instance['faviconUrl'];
         themeColor: Instance['themeColor'];
     };
+    isCat?: boolean;
+    isBot?: boolean;
 };
 
 // @public (undocumented)

@@ -323,7 +323,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 
 		// Parse MFM if needed
 		if (!tags || !emojis || !mentionedUsers) {
-			const tokens = data.text ? mfm.parse(data.text)! : [];
+			const tokens = (data.text ? mfm.parse(data.text)! : []);
 			const cwTokens = data.cw ? mfm.parse(data.cw)! : [];
 			const choiceTokens = data.poll && data.poll.choices
 				? concat(data.poll.choices.map(choice => mfm.parse(choice)!))
