@@ -1141,6 +1141,10 @@ export interface Locale {
     "privacyPolicyUrl": string;
     "tosAndPrivacyPolicy": string;
     "avatarDecorations": string;
+    "attach": string;
+    "detach": string;
+    "angle": string;
+    "flip": string;
     "_announcement": {
         "forExistingUsers": string;
         "forExistingUsersDescription": string;
