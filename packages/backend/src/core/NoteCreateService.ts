@@ -55,6 +55,8 @@ import { MetaService } from '@/core/MetaService.js';
 import { SearchService } from '@/core/SearchService.js';
 
 const mutedWordsCache = new MemorySingleCache<{ userId: MiUserProfile['userId']; mutedWords: MiUserProfile['mutedWords']; }[]>(1000 * 60 * 5);
+import { UtilityService } from '@/core/UtilityService.js';
+import { UserBlockingService } from '@/core/UserBlockingService.js';
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention';
 
@@ -209,6 +211,8 @@ export class NoteCreateService implements OnApplicationShutdown {
 		private perUserNotesChart: PerUserNotesChart,
 		private activeUsersChart: ActiveUsersChart,
 		private instanceChart: InstanceChart,
+		private utilityService: UtilityService,
+		private userBlockingService: UserBlockingService,
 	) { }
 
 	@bindThis
@@ -274,6 +278,18 @@ export class NoteCreateService implements OnApplicationShutdown {
 				case 'specified':
 					// specified / direct noteはreject
 					throw new Error('Renote target is not public or home');
+			}
+		}
+
+		// Check blocking
+		if (data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length === 0)) {
+			if (data.renote.userHost === null) {
+				if (data.renote.userId !== user.id) {
+					const blocked = await this.userBlockingService.checkBlocked(data.renote.userId, user.id);
+					if (blocked) {
+						throw new Error('blocked');
+					}
+				}
 			}
 		}
 
