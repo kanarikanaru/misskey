@@ -3,8 +3,9 @@ name: Lint
 on:
   push:
     branches:
-      - master
-      - develop
+      - main
+      - bsk-dev
+      - Chimera
   pull_request:
 
 jobs:
