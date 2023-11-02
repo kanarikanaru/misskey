@@ -5,9 +5,13 @@ name: Test (misskey.js)
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - bsk-dev
+      - Chimera
   pull_request:
-    branches: [ develop ]
+    branches:
+      - bsk-dev
+      - Chimera
 
 jobs:
   test:
