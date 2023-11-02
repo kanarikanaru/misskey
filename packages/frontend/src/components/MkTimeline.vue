@@ -213,8 +213,6 @@ const pagination = {
 };
 
 const reloadTimeline = (fromPR = false) => {
-	tlNotesCount = 0;
-
 	tlComponent.pagingComponent?.reload().then(() => {
 		reloadStream();
 		if (fromPR) prComponent.refreshFinished();

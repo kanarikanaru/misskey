@@ -5,7 +5,11 @@
 
 import { ref } from 'vue';
 import tinycolor from 'tinycolor2';
-import { globalEvents } from '@/events';
+import { deepClone } from './clone.js';
+import { globalEvents } from '@/events.js';
+import lightTheme from '@/themes/_light.json5';
+import darkTheme from '@/themes/_dark.json5';
+import { miLocalStorage } from '@/local-storage.js';
 
 export type Theme = {
 	id: string;
@@ -15,11 +19,6 @@ export type Theme = {
 	base?: 'dark' | 'light';
 	props: Record<string, string>;
 };
-
-import lightTheme from '@/themes/_light.json5';
-import darkTheme from '@/themes/_dark.json5';
-import { deepClone } from './clone';
-import { miLocalStorage } from '@/local-storage.js';
 
 export const themeProps = Object.keys(lightTheme.props).filter(key => !key.startsWith('X'));
 
