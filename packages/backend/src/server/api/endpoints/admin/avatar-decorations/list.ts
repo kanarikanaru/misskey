@@ -89,7 +89,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 
 			return avatarDecorations.map(avatarDecoration => ({
 				id: avatarDecoration.id,
-				createdAt: this.idService.parse(avatarDecoration.id).date.toISOString(),
+				createdAt: avatarDecoration.createdAt.toISOString(),
 				updatedAt: avatarDecoration.updatedAt?.toISOString() ?? null,
 				name: avatarDecoration.name,
 				description: avatarDecoration.description,
