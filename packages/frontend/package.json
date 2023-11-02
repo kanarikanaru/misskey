@@ -12,7 +12,7 @@
 		"test": "vitest --run",
 		"test-and-coverage": "vitest --run --coverage --globals",
 		"typecheck": "vue-tsc --noEmit",
-		"eslint": "eslint --quiet \"src/**/*.{ts,vue}\"",
+		"eslint": "eslint --fix --quiet \"src/**/*.{ts,vue}\"",
 		"lint": "pnpm typecheck && pnpm eslint"
 	},
 	"dependencies": {

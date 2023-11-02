@@ -1152,6 +1152,7 @@ export interface Locale {
     "refreshing": string;
     "pullDownToRefresh": string;
     "disableStreamingTimeline": string;
+    "cwNotationRequired": string;
     "_announcement": {
         "forExistingUsers": string;
         "forExistingUsersDescription": string;
