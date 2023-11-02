@@ -8,14 +8,12 @@ import { id } from './util/id.js';
 
 @Entity('avatar_decoration')
 export class MiAvatarDecoration {
-	[x: string]: any;
 	@PrimaryColumn(id())
 	public id: string;
 
 	@Column('timestamp with time zone', {
-		nullable: true,
 	})
-	public createdAt: Date
+	public createdAt: Date;
 
 	@Column('timestamp with time zone', {
 		nullable: true,
