@@ -300,6 +300,10 @@ if (props.reply && props.reply.text != null) {
 	}
 }
 
+if ($i?.isSilenced && visibility === 'public') {
+	visibility = 'home';
+}
+
 if (props.channel) {
 	visibility = 'public';
 	localOnly = true; // TODO: チャンネルが連合するようになった折には消す
@@ -449,6 +453,7 @@ function setVisibility() {
 
 	os.popup(defineAsyncComponent(() => import('@/components/MkVisibilityPicker.vue')), {
 		currentVisibility: visibility,
+		isSilenced: $i?.isSilenced,
 		localOnly: localOnly,
 		src: visibilityButton,
 	}, {
