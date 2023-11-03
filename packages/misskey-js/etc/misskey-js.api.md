@@ -1484,10 +1484,6 @@ export type Endpoints = {
         };
         res: null;
     };
-    'i/registry/scopes': {
-        req: NoParams;
-        res: string[][];
-    };
     'i/registry/set': {
         req: {
             key: string;
