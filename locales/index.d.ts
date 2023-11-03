@@ -1824,6 +1824,7 @@ export interface Locale {
         "notesCount": string;
         "nameAndDescription": string;
         "nameOnly": string;
+        "allowRenoteToExternal": string;
     };
     "_menuDisplay": {
         "sideFull": string;

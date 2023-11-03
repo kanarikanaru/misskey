@@ -99,4 +99,9 @@ export class MiChannel {
 		default: false,
 	})
 	public isSensitive: boolean;
+
+	@Column('boolean', {
+		default: true,
+	})
+	public allowRenoteToExternal: boolean;
 }
