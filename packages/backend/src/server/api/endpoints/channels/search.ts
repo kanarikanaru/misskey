@@ -55,7 +55,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 
 			if (ps.query !== '') {
 				if (ps.type === 'nameAndDescription') {
-					query.andWhere(new Brackets(qb => { qb
+					query.andWhere(new Brackets(qb => {
+ qb
 						.where('channel.name ILIKE :q', { q: `%${ sqlLikeEscape(ps.query) }%` })
 						.orWhere('channel.description ILIKE :q', { q: `%${ sqlLikeEscape(ps.query) }%` });
 					}));

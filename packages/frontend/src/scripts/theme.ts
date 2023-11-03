@@ -100,18 +100,11 @@ export function applyTheme(theme: Theme, persist = true) {
 
 function compile(theme: Theme): Record<string, string> {
 	function getColor(val: string): tinycolor.Instance {
-		// ref (prop)
-		if (val[0] === '@') {
+		if (val[0] === '@') { // ref (prop)
 			return getColor(theme.props[val.substring(1)]);
-		}
-
-		// ref (const)
-		else if (val[0] === '$') {
+		} else if (val[0] === '$') { // ref (const)
 			return getColor(theme.props[val]);
-		}
-
-		// func
-		else if (val[0] === ':') {
+		} else if (val[0] === ':') { // func
 			const parts = val.split('<');
 			const func = parts.shift().substring(1);
 			const arg = parseFloat(parts.shift());

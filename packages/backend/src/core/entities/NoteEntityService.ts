@@ -362,6 +362,7 @@ export class NoteEntityService implements OnModuleInit {
 
 		if (packed.user.isCat && packed.text) {
 			const tokens = packed.text ? mfm.parse(packed.text) : [];
+
 			function nyaizeNode(node: mfm.MfmNode) {
 				if (node.type === 'quote') return;
 				if (node.type === 'text') {
@@ -373,6 +374,7 @@ export class NoteEntityService implements OnModuleInit {
 					}
 				}
 			}
+
 			for (const node of tokens) {
 				nyaizeNode(node);
 			}

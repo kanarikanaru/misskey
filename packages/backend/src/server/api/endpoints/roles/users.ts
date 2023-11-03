@@ -62,7 +62,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 
 			const query = this.queryService.makePaginationQuery(this.roleAssignmentsRepository.createQueryBuilder('assign'), ps.sinceId, ps.untilId)
 				.andWhere('assign.roleId = :roleId', { roleId: role.id })
-				.andWhere(new Brackets(qb => { qb
+				.andWhere(new Brackets(qb => {
+ qb
 					.where('assign.expiresAt IS NULL')
 					.orWhere('assign.expiresAt > :now', { now: new Date() });
 				}))

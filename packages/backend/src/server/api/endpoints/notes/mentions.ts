@@ -59,7 +59,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				.where('following.followerId = :followerId', { followerId: me.id });
 
 			const query = this.queryService.makePaginationQuery(this.notesRepository.createQueryBuilder('note'), ps.sinceId, ps.untilId)
-				.andWhere(new Brackets(qb => { qb
+				.andWhere(new Brackets(qb => {
+ qb
 					.where(`'{"${me.id}"}' <@ note.mentions`)
 					.orWhere(`'{"${me.id}"}' <@ note.visibleUserIds`);
 				}))

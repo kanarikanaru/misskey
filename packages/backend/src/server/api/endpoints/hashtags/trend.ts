@@ -85,7 +85,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 
 			const tagNotes = await this.notesRepository.createQueryBuilder('note')
 				.where('note.createdAt > :date', { date: new Date(now.getTime() - rangeA) })
-				.andWhere(new Brackets(qb => { qb
+				.andWhere(new Brackets(qb => {
+ qb
 					.where('note.visibility = \'public\'')
 					.orWhere('note.visibility = \'home\'');
 				}))
