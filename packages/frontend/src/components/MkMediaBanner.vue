@@ -35,7 +35,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import * as Misskey from 'misskey-js';
-import { soundConfigStore } from '@/scripts/sound.js';
 import { i18n } from '@/i18n.js';
 
 const props = withDefaults(defineProps<{
