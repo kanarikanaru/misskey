@@ -46,7 +46,7 @@ export class ChannelFollowingService implements OnModuleInit {
 		targetChannel: MiChannel,
 	): Promise<void> {
 		await this.channelFollowingsRepository.insert({
-			id: this.idService.gen(),
+			id: this.idService.genId(),
 			followerId: requestUser.id,
 			followeeId: targetChannel.id,
 		});
