@@ -85,7 +85,7 @@ Misskeyフォーク元と、MisskeyIOフォークから変更を部分的に取�
 - Enhance: プロフィールの自己紹介欄のMFMが連合するようになりました
 	- 相手がMisskey v2023.11.0以降である必要があります
 - Enhance: AP: ApplicationタイプのアカウントをisBotとして扱うように
-- Enhance: ActivityPubの署名用鍵長を3072itに変更(新規アカウントのみ)
+- Enhance: ActivityPubの署名用鍵長を3072bitに変更(新規アカウントのみ)
 	- (IO) [enhance(backend): use RSA 3072bit (misskey-dev#137)](https://github.com/kanarikanaru/backspacekey/commit/5d2de975b67430638f4c196cfb3f18ba166bd05e#diff-37e1031bafecba679a17777231639791cab86d877ecd7581ffdd77fb9288b06f)
 - Change: カスタム絵文字管理画面でのライセンス欄が複数行に変更されました
 	- (IO)[spec: カスタム絵文字のライセンスの項目を複数行テキストに (misskey-dev#130)](https://github.com/kanarikanaru/backspacekey/commit/04095b56946961a070cb507ead710496004c8b88)
