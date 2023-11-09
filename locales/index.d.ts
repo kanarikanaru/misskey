@@ -1152,7 +1152,6 @@ export interface Locale {
     "refreshing": string;
     "pullDownToRefresh": string;
     "disableStreamingTimeline": string;
-    "useGroupedNotifications": string;
     "signupPendingError": string;
     "cwNotationRequired": string;
     "useGroupedNotifications": string;
