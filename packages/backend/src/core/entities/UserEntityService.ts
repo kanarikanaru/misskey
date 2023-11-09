@@ -337,7 +337,6 @@ export class UserEntityService implements OnModuleInit {
 		const isAdmin = isMe && opts.detail ? this.roleService.isAdministrator(user) : null;
 		const unreadAnnouncements = isMe && opts.detail ?
 			(await this.announcementService.getUnreadAnnouncements(user)).map((announcement) => ({
-				createdAt: this.idService.parse(announcement.id).date.toISOString(),
 				...announcement,
 			})) : null;
 
