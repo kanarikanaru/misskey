@@ -13,6 +13,14 @@
 -->
 
 
+## 2023.09-bsk-3.0.1 (chimera)
+### Abstract
+不具合修正をおこないました。
+
+### Client
+- Fix: リロードしないと新しい通知が表示されない問題を修正
+
+
 ## 2023.09-bsk-3.0 (chimera)
 ### Abstract
 Misskeyフォーク元と、MisskeyIOフォークから変更を部分的に取り入れました。 ありがとうございます。
@@ -96,6 +104,7 @@ Misskeyフォーク元と、MisskeyIOフォークから変更を部分的に取�
 ## 2023.09-bsk-2.1 (chimera)
 ### Abstract
 Misskeyフォーク元からの機能を導入しました。
+
 ### Client
 - Enhance: TLの返信表示オプションを記憶するように
 
