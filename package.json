@@ -1,6 +1,6 @@
 {
 	"name": "misskey",
-	"version": "2023.9.3-bsk-3.0",
+	"version": "2023.9.3-bsk-3.0.1",
 	"codename": "nasubi",
 	"codename_backspacekey": "chimera",
 	"repository": {
