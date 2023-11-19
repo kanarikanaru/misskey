@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export class DeleteCreatedAt1697420555911 {
-    name = 'DeleteCreatedAt1697420555911'
+export class DeleteCreatedAt1700303245006 {
+    name = 'DeleteCreatedAt1700303245006'
 
     async up(queryRunner) {
         await queryRunner.query(`DROP INDEX "public"."IDX_02878d441ceae15ce060b73daf"`);
@@ -72,6 +72,7 @@ export class DeleteCreatedAt1697420555911 {
         await queryRunner.query(`ALTER TABLE "role_assignment" DROP COLUMN "createdAt"`);
         await queryRunner.query(`ALTER TABLE "flash" DROP COLUMN "createdAt"`);
         await queryRunner.query(`ALTER TABLE "flash_like" DROP COLUMN "createdAt"`);
+				await queryRunner.query(`ALTER TABLE "avatar_decoration" DROP COLUMN "createdAt"`);
     }
 
     async down(queryRunner) {
@@ -122,6 +123,7 @@ export class DeleteCreatedAt1697420555911 {
         await queryRunner.query(`ALTER TABLE "user" ADD "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL`);
         await queryRunner.query(`ALTER TABLE "drive_file" ADD "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL`);
         await queryRunner.query(`ALTER TABLE "drive_folder" ADD "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL`);
+        await queryRunner.query(`ALTER TABLE "avatar_decoration" ADD "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL`);
         await queryRunner.query(`CREATE INDEX "IDX_149d2e44785707548c82999b01" ON "flash" ("createdAt") `);
         await queryRunner.query(`CREATE INDEX "IDX_0fb627e1c2f753262a74f0562d" ON "poll_vote" ("createdAt") `);
         await queryRunner.query(`CREATE INDEX "IDX_fbb4297c927a9b85e9cefa2eb1" ON "page" ("createdAt") `);
