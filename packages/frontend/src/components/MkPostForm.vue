@@ -1111,7 +1111,6 @@ defineExpose({
 	margin: 0 20px 16px 20px;
 }
 
-
 .hasNotSpecifiedMentions {
 	margin: 0 20px 16px 20px;
 }
