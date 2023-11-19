@@ -724,7 +724,7 @@ export interface Locale {
     "loadRawImages": string;
     "disableShowingAnimatedImages": string;
     "highlightSensitiveMedia": string;
-		"allowReactionsBeams": string;
+    "allowReactionsBeams": string;
     "verificationEmailSent": string;
     "notSet": string;
     "emailVerified": string;
@@ -1015,6 +1015,7 @@ export interface Locale {
     "disableFederationConfirm": string;
     "disableFederationConfirmWarn": string;
     "disableFederationOk": string;
+    "contentWarningWarn": string;
     "invitationRequiredToRegister": string;
     "emailNotSupported": string;
     "postToTheChannel": string;
@@ -1809,6 +1810,7 @@ export interface Locale {
         "about": string;
         "contributors": string;
         "allContributors": string;
+        "sourceOriginal": string;
         "source": string;
         "translation": string;
         "donate": string;
