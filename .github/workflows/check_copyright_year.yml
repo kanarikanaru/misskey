@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - bsk-dev
-      - Chimera
+      - PushTL+RemoveCreatedAt
 
 jobs:
   check_copyright_year:
