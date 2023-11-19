@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - bsk-dev
-      - PushTL+RemoveCreatedAt'
+      - PushTL+RemoveCreatedAt
   pull_request:
 
 env:
