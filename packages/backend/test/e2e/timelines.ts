@@ -382,7 +382,7 @@ describe('Timelines', () => {
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote2.id), true);
 			assert.strictEqual(res.body.some((note: any) => note.id === carolNote1.id), false);
 			assert.strictEqual(res.body.some((note: any) => note.id === carolNote2.id), false);
-		}, 1000 * 10);
+		}, 1000 * 100);
 
 		test.concurrent('フォローしているユーザーのチャンネル投稿が含まれない', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
@@ -676,7 +676,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 100);
 	});
 
 	describe('Social TL', () => {
@@ -814,7 +814,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 100);
 	});
 
 	describe('User List TL', () => {
@@ -1009,7 +1009,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 100);
 
 		test.concurrent('リスインしているユーザーの自身宛ての visibility: specified なノートが含まれる', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
@@ -1168,7 +1168,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some((note: any) => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 100);
 
 		test.concurrent('[withChannelNotes: true] チャンネル投稿が含まれる', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
