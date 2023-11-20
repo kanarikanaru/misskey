@@ -1,6 +1,6 @@
 {
 	"name": "misskey",
-	"version": "2023.11.1-bsk-4.0",
+	"version": "2023.11.1-bsk-4.0.1",
 	"codename": "nasubi",
 	"codename_backspacekey": "waterdrop",
 	"repository": {
