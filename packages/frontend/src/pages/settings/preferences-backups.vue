@@ -66,7 +66,6 @@ const defaultStoreSaveKeys: (keyof typeof defaultStore['state'])[] = [
 	'serverDisconnectedBehavior',
 	'nsfw',
 	'highlightSensitiveMedia',
-	'allowReactionsBeams',
 	'animation',
 	'animatedMfm',
 	'advancedMfm',
