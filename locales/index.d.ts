@@ -725,7 +725,6 @@ export interface Locale {
     "loadRawImages": string;
     "disableShowingAnimatedImages": string;
     "highlightSensitiveMedia": string;
-    "allowReactionsBeams": string;
     "verificationEmailSent": string;
     "notSet": string;
     "emailVerified": string;
