@@ -13,6 +13,14 @@
 -->
 
 
+## 2023.11.1-bsk-4.0.7 (waterdrop)
+### Abstract
+- CWのボタンが表示されない不具合に対処しました
+
+### Client
+- Fix: CWのボタンがプレビュー時以外にも表示されるように
+
+
 ## 2023.11.1-bsk-4.0.6 (waterdrop)
 ### Abstract
 - Misskeyのdevelopブランチに追従しました 
