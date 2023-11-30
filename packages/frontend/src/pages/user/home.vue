@@ -132,7 +132,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<XActivity :key="user.id" :user="user"/>
 				</template>
 				<div v-if="!disableNotes">
-					<div style="margin-bottom: 8px;">{{ i18n.ts.featured }}</div>
+					<div style="margin-bottom: 8px;">{{ i18n.ts.note }}</div>
 					<MkNotes :class="$style.tl" :noGap="true" :pagination="pagination"/>
 				</div>
 			</div>
@@ -214,7 +214,7 @@ watch($$(moderationNote), async () => {
 });
 
 const pagination = {
-	endpoint: 'users/featured-notes' as const,
+	endpoint: 'users/notes' as const,
 	limit: 10,
 	params: computed(() => ({
 		userId: props.user.id,
