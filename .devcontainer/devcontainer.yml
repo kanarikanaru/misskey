@@ -56,17 +56,17 @@ dbReplications: false
 # You can configure any number of replicas here
 #dbSlaves:
 #  -
-#    host: 
-#    port: 
-#    db: 
-#    user: 
-#    pass: 
+#    host:
+#    port:
+#    db:
+#    user:
+#    pass:
 #  -
-#    host: 
-#    port: 
-#    db: 
-#    user: 
-#    pass: 
+#    host:
+#    port:
+#    db:
+#    user:
+#    pass:
 
 #   ┌─────────────────────┐
 #───┘ Redis configuration └─────────────────────────────────────
@@ -106,12 +106,12 @@ redis:
 #   ┌───────────────────────────┐
 #───┘ MeiliSearch configuration └─────────────────────────────
 
-#meilisearch:
-#  host: meilisearch
-#  port: 7700
-#  apiKey: ''
-#  ssl: true
-#  index: ''
+meilisearch:
+  host: meilisearch
+  port: 7700
+  apiKey: ''
+  ssl: false
+  index: 'dev'
 
 #   ┌───────────────┐
 #───┘ ID generation └───────────────────────────────────────────
