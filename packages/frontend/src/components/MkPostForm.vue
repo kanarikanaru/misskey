@@ -1040,7 +1040,6 @@ defineExpose({
 	}
 }
 
-
 .colorBar {
 	position: absolute;
 	top: 0px;
