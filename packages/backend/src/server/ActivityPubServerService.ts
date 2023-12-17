@@ -138,7 +138,7 @@ export class ActivityPubServerService {
 				return;
 			}
 
-			const algo = match[1];
+			const algo = match[1].toUpperCase();
 			const digestValue = match[2];
 
 			if (algo !== 'SHA-256') {
@@ -370,8 +370,9 @@ export class ActivityPubServerService {
 			order: { id: 'DESC' },
 		});
 
-		const pinnedNotes = await Promise.all(pinings.map(pining =>
-			this.notesRepository.findOneByOrFail({ id: pining.noteId })));
+		const pinnedNotes = (await Promise.all(pinings.map(pining =>
+			this.notesRepository.findOneByOrFail({ id: pining.noteId }))))
+			.filter(note => !note.localOnly && ['public', 'home'].includes(note.visibility));
 
 		const renderedNotes = await Promise.all(pinnedNotes.map(note => this.apRendererService.renderNote(note)));
 
@@ -492,8 +493,7 @@ export class ActivityPubServerService {
 
 	@bindThis
 	public createServer(fastify: FastifyInstance, options: FastifyPluginOptions, done: (err?: Error) => void) {
-		// addConstraintStrategy の型定義がおかしいため
-		(fastify.addConstraintStrategy as any)({
+		fastify.addConstraintStrategy({
 			name: 'apOrHtml',
 			storage() {
 				const store = {} as any;

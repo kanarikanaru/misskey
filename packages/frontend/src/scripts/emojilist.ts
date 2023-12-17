@@ -45,6 +45,7 @@ export function getEmojiName(char: string): string | null {
 }
 
 export interface CustomEmojiFolderTree {
+	value: string;
 	category: string;
 	children: CustomEmojiFolderTree[];
 }

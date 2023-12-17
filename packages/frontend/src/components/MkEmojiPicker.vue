@@ -36,7 +36,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</section>
 
 		<div v-if="tab === 'index'" class="group index">
-			<section v-if="showPinned">
+			<section v-if="showPinned && pinned.length > 0">
 				<div class="body">
 					<button
 						v-for="emoji in pinned"
@@ -74,14 +74,14 @@ SPDX-License-Identifier: AGPL-3.0-only
 			<header class="_acrylic">{{ i18n.ts.customEmojis }}</header>
 			<XSection
 				v-for="child in customEmojiFolderRoot.children"
-				:key="`custom:${child.category}`"
+				:key="`custom:${child.value}`"
 				:initialShown="false"
-				:emojis="computed(() => customEmojis.filter(e => child.category === '' ? (e.category === 'null' || !e.category) : e.category === child.category).filter(filterAvailable).map(e => `:${e.name}:`))"
-        :hasChildSection="child.children.length !== 0"
-        :customEmojiTree="child.children"
+				:emojis="computed(() => customEmojis.filter(e => child.value === '' ? (e.category === 'null' || !e.category) : e.category === child.value).filter(filterAvailable).map(e => `:${e.name}:`))"
+				:hasChildSection="child.children.length !== 0"
+				:customEmojiTree="child.children"
 				@chosen="chosen"
 			>
-				{{ child.category || i18n.ts.other }}
+				{{ child.value || i18n.ts.other }}
 			</XSection>
 		</div>
 		<div v-once class="group">
@@ -103,12 +103,12 @@ import { ref, shallowRef, computed, watch, onMounted } from 'vue';
 import * as Misskey from 'misskey-js';
 import XSection from '@/components/MkEmojiPicker.section.vue';
 import {
-  emojilist,
-  emojiCharByCategory,
-  UnicodeEmojiDef,
-  unicodeEmojiCategories as categories,
-  getEmojiName,
-  CustomEmojiFolderTree
+	emojilist,
+	emojiCharByCategory,
+	UnicodeEmojiDef,
+	unicodeEmojiCategories as categories,
+	getEmojiName,
+	CustomEmojiFolderTree,
 } from '@/scripts/emojilist.js';
 import MkRippleEffect from '@/components/MkRippleEffect.vue';
 import * as os from '@/os.js';
@@ -121,10 +121,11 @@ import { $i } from '@/account.js';
 
 const props = withDefaults(defineProps<{
 	showPinned?: boolean;
-	asReactionPicker?: boolean;
+  pinnedEmojis?: string[];
 	maxHeight?: number;
 	asDrawer?: boolean;
 	asWindow?: boolean;
+	asReactionPicker?: boolean; // 今は使われてないが将来的に使いそう
 }>(), {
 	showPinned: true,
 });
@@ -137,37 +138,32 @@ const searchEl = shallowRef<HTMLInputElement>();
 const emojisEl = shallowRef<HTMLDivElement>();
 
 const {
-	reactions: pinned,
-	reactionPickerSize,
-	reactionPickerWidth,
-	reactionPickerHeight,
-	disableShowingAnimatedImages,
+	emojiPickerScale,
+	emojiPickerWidth,
+	emojiPickerHeight,
 	recentlyUsedEmojis,
 } = defaultStore.reactiveState;
 
-const size = computed(() => props.asReactionPicker ? reactionPickerSize.value : 1);
-const width = computed(() => props.asReactionPicker ? reactionPickerWidth.value : 3);
-const height = computed(() => props.asReactionPicker ? reactionPickerHeight.value : 2);
+const pinned = computed(() => props.pinnedEmojis);
+const size = computed(() => emojiPickerScale.value);
+const width = computed(() => emojiPickerWidth.value);
+const height = computed(() => emojiPickerHeight.value);
 const q = ref<string>('');
-const searchResultCustom = ref<Misskey.entities.CustomEmoji[]>([]);
+const searchResultCustom = ref<Misskey.entities.EmojiSimple[]>([]);
 const searchResultUnicode = ref<UnicodeEmojiDef[]>([]);
 const tab = ref<'index' | 'custom' | 'unicode' | 'tags'>('index');
 
-const customEmojiFolderRoot: CustomEmojiFolderTree = { category: "", children: [] };
+const customEmojiFolderRoot: CustomEmojiFolderTree = { value: '', category: '', children: [] };
 
 function parseAndMergeCategories(input: string, root: CustomEmojiFolderTree): CustomEmojiFolderTree {
-	const parts = (input && input !== 'null' ? input : '').split(' / ');
+	const parts = input.split('/').map(p => p.trim());
 	let currentNode: CustomEmojiFolderTree = root;
 
 	for (const part of parts) {
-		const path = currentNode.category ? `${currentNode.category} / ${part}` : part;
+		let existingNode = currentNode.children.find((node) => node.value === part);
 
-		let existingNode = currentNode.children.find((node) => node.category === path);
 		if (!existingNode) {
-			const newNode: CustomEmojiFolderTree = {
-				category: path,
-				children: [],
-			};
+			const newNode: CustomEmojiFolderTree = { value: part, category: input, children: [] };
 			currentNode.children.push(newNode);
 			existingNode = newNode;
 		}
@@ -179,9 +175,9 @@ function parseAndMergeCategories(input: string, root: CustomEmojiFolderTree): Cu
 }
 
 customEmojiCategories.value.forEach(ec => {
-  if (ec !== null) {
-    parseAndMergeCategories(ec, customEmojiFolderRoot);
-  }
+	if (ec !== null) {
+		parseAndMergeCategories(ec, customEmojiFolderRoot);
+	}
 });
 
 parseAndMergeCategories('', customEmojiFolderRoot);
@@ -200,7 +196,7 @@ watch(q, () => {
 	const searchCustom = () => {
 		const max = 100;
 		const emojis = customEmojis.value;
-		const matches = new Set<Misskey.entities.CustomEmoji>();
+		const matches = new Set<Misskey.entities.EmojiSimple>();
 
 		const exactMatch = emojis.find(emoji => emoji.name === newQ);
 		if (exactMatch) matches.add(exactMatch);
@@ -330,7 +326,7 @@ watch(q, () => {
 	searchResultUnicode.value = Array.from(searchUnicode());
 });
 
-function filterAvailable(emoji: Misskey.entities.CustomEmoji): boolean {
+function filterAvailable(emoji: Misskey.entities.EmojiSimple): boolean {
 	return (emoji.roleIdsThatCanBeUsedThisEmojiAsReaction == null || emoji.roleIdsThatCanBeUsedThisEmojiAsReaction.length === 0) || ($i && $i.roles.some(r => emoji.roleIdsThatCanBeUsedThisEmojiAsReaction.includes(r.id)));
 }
 
@@ -347,7 +343,7 @@ function reset() {
 	q.value = '';
 }
 
-function getKey(emoji: string | Misskey.entities.CustomEmoji | UnicodeEmojiDef): string {
+function getKey(emoji: string | Misskey.entities.EmojiSimple | UnicodeEmojiDef): string {
 	return typeof emoji === 'string' ? emoji : 'char' in emoji ? emoji.char : `:${emoji.name}:`;
 }
 
@@ -371,7 +367,7 @@ function chosen(emoji: any, ev?: MouseEvent) {
 	emit('chosen', key);
 
 	// 最近使った絵文字更新
-	if (!pinned.value.includes(key)) {
+	if (!pinned.value?.includes(key)) {
 		let recents = defaultStore.state.recentlyUsedEmojis;
 		recents = recents.filter((emoji: any) => emoji !== key);
 		recents.unshift(key);
