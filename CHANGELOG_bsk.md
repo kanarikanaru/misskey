@@ -13,6 +13,14 @@
 -->
 
 
+## 2023.11.1-bsk-4.0.９ (waterdrop)
+### Abstract
+- アバターデコレーションの上限数を4096個に引き上げました
+
+### Server
+- Fix ＆ Enhance: アバターデコレーション数の制限を4096個まで設定できるように
+
+
 ## 2023.11.1-bsk-4.0.8 (waterdrop)
 ### Abstract
 - MisskeyのDevelopブランチに追従しました
