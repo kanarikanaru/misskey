@@ -15,7 +15,7 @@ import { sqlLikeEscape } from '@/misc/sql-like-escape.js';
 export const meta = {
 	tags: ['admin'],
 
-	kind: 'read:admin',
+	kind: 'read:emoji-managements',
 
 	requireCredential: true,
 	requireRolePolicy: 'canManageCustomEmojis',

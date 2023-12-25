@@ -2071,6 +2071,10 @@ export interface Locale {
         "write:flash": string;
         "read:flash-likes": string;
         "write:flash-likes": string;
+        "read:emoji-managements": string;
+        "write:emoji-managements": string;
+        "read:avatarDecorations-managements": string;
+        "write:avatarDecorations-managements": string;
     };
     "_auth": {
         "shareAccessTitle": string;

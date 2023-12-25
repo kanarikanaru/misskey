@@ -1976,6 +1976,10 @@ _permissions:
   "write:flash": "Playを操作する"
   "read:flash-likes": "Playのいいねを見る"
   "write:flash-likes": "Playのいいねを操作する"
+  "read:emoji-managements": "カスタム絵文字の管理を見る"
+  "write:emoji-managements": "カスタム絵文字の管理を操作する"
+  "read:avatarDecorations-managements": "アバターデコレーションの管理を見る"
+  "write:avatarDecorations-managements": "アバターデコレーションの管理を操作する"
 
 _auth:
   shareAccessTitle: "アプリへのアクセス許可"

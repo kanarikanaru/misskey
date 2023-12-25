@@ -70,6 +70,7 @@ const emit = defineEmits<{
 const dialog = shallowRef<InstanceType<typeof MkModalWindow>>();
 const name = ref(props.initialName);
 const permissions = ref({});
+// TODO: ロールで割り当てられていない権限が表示されないように
 
 if (props.initialPermissions) {
 	for (const kind of props.initialPermissions) {

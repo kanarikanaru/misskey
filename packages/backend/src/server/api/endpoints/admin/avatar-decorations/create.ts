@@ -10,7 +10,7 @@ import { AvatarDecorationService } from '@/core/AvatarDecorationService.js';
 export const meta = {
 	tags: ['admin'],
 
-	kind: 'write:admin',
+	kind: 'write:avatar-decoration-managements',
 
 	requireCredential: true,
 	requireRolePolicy: 'canManageAvatarDecorations',
