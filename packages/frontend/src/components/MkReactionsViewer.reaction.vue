@@ -146,7 +146,6 @@ if (!mock) {
 	font-size: 1.5em;
 	border-radius: 6px;
 	align-items: center;
-	justify-content: center;
 
 	&.canToggle {
 		background: var(--buttonBg);
@@ -164,6 +163,7 @@ if (!mock) {
 		height: 32px;
 		font-size: 1em;
 		border-radius: 4px;
+		justify-content: center;
 
 		> .count {
 			font-size: 0.9em;
@@ -175,6 +175,7 @@ if (!mock) {
 		height: 52px;
 		font-size: 2em;
 		border-radius: 8px;
+		justify-content: center;
 
 		> .count {
 			font-size: 0.6em;
@@ -186,6 +187,7 @@ if (!mock) {
 		background: var(--accentedBg);
 		color: var(--accent);
 		box-shadow: 0 0 0 1px var(--accent) inset;
+		justify-content: center;
 
 		> .count {
 			color: var(--accent);
@@ -205,5 +207,6 @@ if (!mock) {
 	font-size: 0.7em;
 	line-height: 42px;
 	margin: 0 0 0 4px;
+	justify-content: center;
 }
 </style>
