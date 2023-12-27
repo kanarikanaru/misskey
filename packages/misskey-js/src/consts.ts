@@ -45,10 +45,6 @@ export const permissions = [
 	'write:flash',
 	'read:flash-likes',
 	'write:flash-likes',
-	'read:emoji-managements',
-	'write:emoji-managements',
-	'read:avatarDecorations-managements',
-	'write:avatarDecorations-managements',
 ];
 
 export const moderationLogTypes = [

@@ -36,9 +36,5 @@ export const kinds = [
 	'write:gallery',
 	'read:gallery-likes',
 	'write:gallery-likes',
-	'read:emoji-managements',
-	'write:emoji-managements',
-	'read:avatarDecorations-managements',
-	'write:avatarDecorations-managements',
 ];
 // IF YOU ADD KINDS(PERMISSIONS), YOU MUST ADD TRANSLATIONS (under _permissions).
