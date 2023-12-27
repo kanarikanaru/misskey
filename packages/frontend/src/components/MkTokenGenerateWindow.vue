@@ -67,7 +67,10 @@ const emit = defineEmits<{
 	(ev: 'done', result: { name: string | null, permissions: string[] }): void;
 }>();
 
-const defaultPermissions = Misskey.permissions.filter(p => !p.startsWith('read:admin') && !p.startsWith('write:admin'));
+const defaultPermissions = Misskey.permissions.filter(p =>
+	!p.startsWith('read:admin') && !p.startsWith('write:admin') ||
+    p === 'write:admin:emoji' || p === 'read:admin:emoji',
+);
 const dialog = shallowRef<InstanceType<typeof MkModalWindow>>();
 const name = ref(props.initialName);
 const permissions = ref(<Record<(typeof Misskey.permissions)[number], boolean>>{});
