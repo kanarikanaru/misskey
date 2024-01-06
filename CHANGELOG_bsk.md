@@ -13,6 +13,26 @@
 -->
 
 
+## 2023.12.2-bsk-5.0.0 (waterdrop)
+### Abstract
+- Developブランチへ追従しました
+- アプリ開発者の方へ：/notes/featuredで取得できる最大件数が15件となりました
+
+### General
+- Feat: [mCaptcha](https://github.com/mCaptcha/mCaptcha)のサポートを追加
+
+### Client
+- Feat: 新しいゲームを追加
+- Enhance: ハッシュタグ入力時に、本文の末尾の行に何も書かれていない場合は新たにスペースを追加しないように
+- Fix: v2023.12.0で追加された「モデレーターがユーザーのアイコンもしくはバナー画像を未設定状態にできる機能」が管理画面上で正しく表示されていない問題を修正
+- Enhance: チャンネルノートのピン留めをノートのメニューからできるよ
+
+### Server
+- Enhance: 連合先のレートリミットに引っかかった際にリトライするようになりました
+- Enhance: ActivityPub Deliver queueでBodyを事前処理するように (#12916)
+- Enhance: サーバーの規模に合わせてみつけるに表示されるノートの数を調整
+
+
 ## 2023.12.2-bsk-4.0.13 (waterdrop)
 ### Abstract
 - 2023.12.2に追従しました
