@@ -61,7 +61,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				if (this.globalNotesRankingCacheLastFetchedAt !== 0 && (Date.now() - this.globalNotesRankingCacheLastFetchedAt < 1000 * 60 * 30)) {
 					noteIds = this.globalNotesRankingCache;
 				} else {
-					noteIds = await this.featuredService.getGlobalNotesRanking(100);
+					noteIds = await this.featuredService.getGlobalNotesRanking(15);
 					this.globalNotesRankingCache = noteIds;
 					this.globalNotesRankingCacheLastFetchedAt = Date.now();
 				}
