@@ -31,6 +31,7 @@
 - Enhance: ActivityPub Deliver queueでBodyを事前処理するように (#12916)
 - Enhance: クリップをエクスポートできるように
 - Fix: `drive/files/update`でファイル名のバリデーションが機能していない問題を修正
+- Enhance: 絵文字ピッカー・オートコンプリートで、完全一致した絵文字を優先的に表示するように
 
 ## 2023.12.2
 
