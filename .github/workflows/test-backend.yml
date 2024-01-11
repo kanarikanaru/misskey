@@ -3,9 +3,17 @@ name: Test (backend)
 on:
   push:
     branches:
-      - main
-      - bsk-dev
+      - master
+      - develop
+    paths:
+      - packages/backend/**
+      # for permissions
+      - packages/misskey-js/**
   pull_request:
+    paths:
+      - packages/backend/**
+      # for permissions
+      - packages/misskey-js/**
 
 jobs:
   unit:

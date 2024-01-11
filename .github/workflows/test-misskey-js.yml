@@ -5,11 +5,13 @@ name: Test (misskey.js)
 
 on:
   push:
-    branches:
-      - bsk-dev
+    branches: [ develop ]
+    paths:
+      - packages/misskey-js/**
   pull_request:
-    branches:
-      - bsk-dev
+    branches: [ develop ]
+    paths:
+      - packages/misskey-js/**
 
 jobs:
   test:

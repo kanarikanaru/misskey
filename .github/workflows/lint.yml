@@ -3,9 +3,21 @@ name: Lint
 on:
   push:
     branches:
-      - main
-      - bsk-dev
+      - master
+      - develop
+    paths:
+      - packages/backend/**
+      - packages/frontend/**
+      - packages/sw/**
+      - packages/misskey-js/**
+      - packages/shared/.eslintrc.js
   pull_request:
+    paths:
+      - packages/backend/**
+      - packages/frontend/**
+      - packages/sw/**
+      - packages/misskey-js/**
+      - packages/shared/.eslintrc.js
 
 jobs:
   pnpm_install:
