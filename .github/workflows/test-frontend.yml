@@ -20,6 +20,8 @@ on:
       # for e2e
       - packages/backend/**
 
+  workflow_dispatch:
+
 jobs:
   vitest:
     runs-on: ubuntu-latest

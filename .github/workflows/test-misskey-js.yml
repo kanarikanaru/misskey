@@ -12,6 +12,7 @@ on:
     branches: [ bsk-dev ]
     paths:
       - packages/misskey-js/**
+  workflow_dispatch:
 
 jobs:
   test:

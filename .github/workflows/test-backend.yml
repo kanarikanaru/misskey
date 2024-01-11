@@ -14,6 +14,7 @@ on:
       - packages/backend/**
       # for permissions
       - packages/misskey-js/**
+  workflow_dispatch:
 
 jobs:
   unit:

@@ -18,6 +18,7 @@ on:
       - packages/sw/**
       - packages/misskey-js/**
       - packages/shared/.eslintrc.js
+  workflow_dispatch:
 
 jobs:
   pnpm_install:

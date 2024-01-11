@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - packages/backend/**
+  workflow_dispatch:
 
 jobs:
   validate-api-json:
