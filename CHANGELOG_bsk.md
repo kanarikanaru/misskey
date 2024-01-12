@@ -13,6 +13,13 @@
 -->
 
 
+## 2023.12.2-bsk-5.0.3 (waterdrop)
+### Abstract
+- Developブランチへ追従しました
+- AiScriptを0.16.0にダウングレードしました
+- バブルゲームに変更が入りました
+
+
 ## 2023.12.2-bsk-5.0.2 (waterdrop)
 ### Abstract
 - Developブランチへ追従しました
