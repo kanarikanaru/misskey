@@ -13,6 +13,22 @@
 -->
 
 
+## 2023.12.2-bsk-5.0.4 (waterdrop)
+### Abstract
+- Developブランチへ追従しました
+
+### Client
+- Feat: 絵文字の詳細ダイアログを追加
+- Feat: 枠線をつけるMFM`$[border.width=1,style=solid,color=fff,radius=0 ...]`を追加
+- Enhance: Playの説明欄にMFMを使えるように
+
+### Server
+- Enhance: `api.json`のOpenAPI Specificationを3.1.0に更新
+- Fix: `notes/create`で、`text`が空白文字のみで構成されているか`null`であって、かつ`text`だけであるリクエストに対するレスポンスが400になるように変更
+- Fix: `notes/create`で、`text`が空白文字のみで構成されていてかつリノート、ファイルまたは投票を含んでいるリクエストに対するレスポンスの`text`が`""`から`null`になるように変更
+- Fix: ipv4とipv6の両方が利用可能な環境でallowedPrivateNetworksが設定されていた場合プライベートipの検証ができていなかった問題を修正
+
+
 ## 2023.12.2-bsk-5.0.3 (waterdrop)
 ### Abstract
 - Developブランチへ追従しました
