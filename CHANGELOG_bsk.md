@@ -13,6 +13,13 @@
 -->
 
 
+## 2023.12.2-bsk-5.0.5 (waterdrop)
+### Abstract
+- Developブランチへ追従しました
+
+### Server
+- ファイルが添付されたノートの検索度速度が向上しました
+
 ## 2023.12.2-bsk-5.0.4 (waterdrop)
 ### Abstract
 - Developブランチへ追従しました
