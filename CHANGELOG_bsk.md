@@ -13,6 +13,44 @@
 -->
 
 
+## 2023.12.2-bsk-5.0.6 (waterdrop)
+### Abstract
+- Developブランチへ追従しました
+- 今までの「TLに他の人への返信を含める」設定は一旦リセットされます
+- スワイプでタイムラインが切り替えられるようになります
+- リバーシが追加されます
+
+### Note
+- 外部サイトからプラグインをインストールする場合のパスが`/install-extentions`から`/install-extensions`に変わります。現時点では以前のパスも利用できますが、非推奨です。
+
+### General
+- Feat: Add support for TrueMail
+
+### Client
+- Feat: 新しいゲームを追加
+- Feat: 音声・映像プレイヤーを追加
+- Feat: 枠線をつけるMFM`$[border.width=1,style=solid,color=fff,radius=0 ...]`を調整
+  - デフォルトで枠線からはみ出る部分が隠されるようにしました。初期と同じ挙動にするには`$[border.noclip`が必要です
+- Feat: スワイプでタブを切り替えられるように
+- Enhance: MFM等のコードブロックに全文コピー用のボタンを追加
+- Enhance: チャンネルノートの場合は詳細ページからその前後のノートを見れるように
+- Enhance: 季節に応じた画面の演出を南半球でも利用できるように
+- Enhance: タイムラインフィルターの設定をすべて保持できるように
+	- 今までの「TLに他の人への返信を含める」設定は一旦リセットされます
+- Enhance: タイムラインフィルターに「センシティブなファイルを含むノートを表示」を追加
+- Enhance: ノート作成画面のファイル添付メニューから直接ファイルを削除できるように
+- Enhance: MFMの属性でオートコンプリートが使用できるように #12735
+- Enhance: 絵文字編集ダイアログをモーダルではなくウィンドウで表示するように
+- Enhance: ページ遷移時にPlayerを閉じるように
+
+### Server
+- Enhance: `/files`のファイルに対してHTTP Rangeリクエストを行えるように
+- Fix: properly handle cc followers
+
+### Service Worker
+- Enhance: オフライン表示のデザインを改善・多言語対応
+
+
 ## 2023.12.2-bsk-5.0.5 (waterdrop)
 ### Abstract
 - Developブランチへ追従しました
