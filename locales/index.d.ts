@@ -569,11 +569,11 @@ export interface Locale extends ILocale {
      */
     "renoteUnmute": string;
     /**
-     * ブロック
+     * フォローを禁止
      */
     "block": string;
     /**
-     * ブロック解除
+     * フォロー禁止を解除
      */
     "unblock": string;
     /**
@@ -585,11 +585,11 @@ export interface Locale extends ILocale {
      */
     "unsuspend": string;
     /**
-     * ブロックしますか？
+     * フォローを禁止しますか？
      */
     "blockConfirm": string;
     /**
-     * ブロック解除しますか？
+     * フォロー禁止を解除しますか？
      */
     "unblockConfirm": string;
     /**
@@ -909,7 +909,7 @@ export interface Locale extends ILocale {
      */
     "silencedInstancesDescription": string;
     /**
-     * ミュートとブロック
+     * ミュートとフォロー禁止
      */
     "muteAndBlock": string;
     /**
@@ -917,7 +917,7 @@ export interface Locale extends ILocale {
      */
     "mutedUsers": string;
     /**
-     * ブロックしたユーザー
+     * フォローを禁止したユーザー
      */
     "blockedUsers": string;
     /**
@@ -2961,7 +2961,7 @@ export interface Locale extends ILocale {
      */
     "disableShowingAnimatedImages": string;
     /**
-     * メディアがセンシティブであることを分かりやすく表示
+     * データセーバー有効時にメディアがセンシティブであることを分かりやすく表示
      */
     "highlightSensitiveMedia": string;
     /**
@@ -4125,11 +4125,11 @@ export interface Locale extends ILocale {
      */
     "disableFederationOk": string;
     /**
-     * 現在このサーバーは招待制です。招待コードをお持ちの方のみ登録できます。
+     * グロテスクであったり、暴力、性的コンテンツを含む場合に、直接的な表現を用いずに内容を説明した注釈を適切に設定する必要があります。
      */
     "contentWarningWarn": string;
     /**
-     * グロテスクであったり、暴力、性的コンテンツを含む場合に、直接的な表現を用いずに内容を説明した注釈を適切に設定する必要があります。
+     * 現在このサーバーは招待制です。招待コードをお持ちの方のみ登録できます。
      */
     "invitationRequiredToRegister": string;
     /**
@@ -6802,7 +6802,7 @@ export interface Locale extends ILocale {
          */
         "allContributors": string;
         /**
-         * ソースコード(フォーク元)
+         * ソースコード (フォーク元)
          */
         "sourceOriginal": string;
         /**
@@ -7198,8 +7198,17 @@ export interface Locale extends ILocale {
              * 警告の文字
              */
             "infoWarnFg": string;
+            /**
+             * CW ボタンの背景
+             */
             "cwBg": string;
+            /**
+             * CW ボタンの文字
+             */
             "cwFg": string;
+            /**
+             * CW ボタンの背景 (ホバー)
+             */
             "cwHoverBg": string;
             /**
              * 通知トーストの背景
@@ -7521,11 +7530,11 @@ export interface Locale extends ILocale {
          */
         "write:account": string;
         /**
-         * ブロックを見る
+         * フォロー禁止を見る
          */
         "read:blocks": string;
         /**
-         * ブロックを操作する
+         * フォロー禁止を操作する
          */
         "write:blocks": string;
         /**
