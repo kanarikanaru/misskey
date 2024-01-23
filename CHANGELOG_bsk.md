@@ -12,6 +12,12 @@
 
 -->
 
+
+## 2023.12.2-bsk-5.0.7 (waterdrop)
+### Abstract
+- CIに関する修正
+
+
 ## 2023.12.2-bsk-5.0.7 (waterdrop)
 ### Abstract
 - Developブランチへ追従しました
