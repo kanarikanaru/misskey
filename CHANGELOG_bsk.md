@@ -13,7 +13,12 @@
 -->
 
 
-## 2023.12.2-bsk-5.0.7 (waterdrop)
+## 2023.12.2-bsk-5.0.9 (waterdrop)
+### Abstract
+- サウンドの設定の保存に関する修正
+
+
+## 2023.12.2-bsk-5.0.8 (waterdrop)
 ### Abstract
 - CIに関する修正
 
