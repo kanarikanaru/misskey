@@ -305,6 +305,11 @@ export class NoteCreateService implements OnApplicationShutdown {
 			}
 		}
 
+		// 返信対象がspecifiedならspecifiedにする
+		if (data.reply && data.reply.visibility === 'specified') {
+			data.visibility = 'specified';
+		}
+
 		// 返信対象がpublicではないならhomeにする
 		if (data.reply && data.reply.visibility !== 'public' && data.visibility === 'public') {
 			data.visibility = 'home';
@@ -370,6 +375,11 @@ export class NoteCreateService implements OnApplicationShutdown {
 
 			if (data.reply && !data.visibleUsers.some(x => x.id === data.reply!.userId)) {
 				data.visibleUsers.push(await this.usersRepository.findOneByOrFail({ id: data.reply!.userId }));
+			}
+
+			// 返信元のvisibleUsersにないユーザーは削除
+			if (data.reply) {
+				data.visibleUsers = data.visibleUsers.filter(u => u.id === data.reply!.userId || data.reply!.visibleUserIds!.includes(u.id));
 			}
 		}
 
