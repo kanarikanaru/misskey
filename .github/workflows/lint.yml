@@ -28,7 +28,7 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v3
       with:
         version: 8
         run_install: false
@@ -55,7 +55,7 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v3
       with:
         version: 7
         run_install: false
@@ -81,7 +81,7 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v3
       with:
         version: 7
         run_install: false
