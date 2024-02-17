@@ -6846,10 +6846,6 @@ export interface Locale extends ILocale {
          */
         "allContributors": string;
         /**
-         * ソースコード (フォーク元)
-         */
-        "sourceOriginal": string;
-        /**
          * ソースコード
          */
         "source": string;

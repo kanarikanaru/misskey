@@ -1752,7 +1752,6 @@ _aboutMisskey:
   about: "Misskeyはsyuiloが2014年からずっと作ってはる、オープンソースなソフトウェアや。"
   contributors: "主な貢献者"
   allContributors: "全ての貢献者"
-  sourceOriginal: "ソースコード (フォーク元)"
   source: "ソースコード"
   translation: "Misskeyを翻訳"
   donate: "Misskeyに寄付"
