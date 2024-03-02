@@ -126,6 +126,14 @@ export class NotificationService implements OnApplicationShutdown {
 					this.cacheService.userFollowingsCache.fetch(notifieeId).then(followings => Object.hasOwn(followings, notifierId)),
 					this.cacheService.userFollowingsCache.fetch(notifierId).then(followings => Object.hasOwn(followings, notifieeId)),
 				]);
+				if (!(isFollowing && isFollower)) {
+					return null;
+				}
+			} else if (recieveConfig?.type === 'followingOrFollower') {
+				const [isFollowing, isFollower] = await Promise.all([
+					this.cacheService.userFollowingsCache.fetch(notifieeId).then(followings => Object.hasOwn(followings, notifierId)),
+					this.cacheService.userFollowingsCache.fetch(notifierId).then(followings => Object.hasOwn(followings, notifieeId)),
+				]);
 				if (!isFollowing && !isFollower) {
 					return null;
 				}
@@ -154,6 +162,8 @@ export class NotificationService implements OnApplicationShutdown {
 			'data', JSON.stringify(notification));
 
 		const packed = await this.notificationEntityService.pack(notification, notifieeId, {});
+
+		if (packed == null) return null;
 
 		// Publish notification event
 		this.globalEventService.publishMainStream(notifieeId, 'notification', packed);
@@ -212,17 +222,6 @@ export class NotificationService implements OnApplicationShutdown {
 		]);
 		this.globalEventService.publishMainStream(userId, 'notificationFlushed');
 	}
-
-	/*
-	@bindThis
-	public async flushAllUsersNotifications() {
-		// これだと時間かかりそう（Queueを使う？）
-		const tlKeys = await this.redisClient.keys('notificationTimeline:*');
-		const latestReadNotificationkeys = await this.redisClient.keys('latestReadNotification:*');
-
-		await this.redisClient.del(...tlKeys, ...latestReadNotificationkeys);
-	}
-	*/
 
 	@bindThis
 	public dispose(): void {
