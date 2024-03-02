@@ -317,11 +317,6 @@ export class NoteCreateService implements OnApplicationShutdown {
 			}
 		}
 
-		// 返信対象がspecifiedならspecifiedにする
-		if (data.reply && data.reply.visibility === 'specified') {
-			data.visibility = 'specified';
-		}
-
 		// 返信対象がpublicではないならhomeにする
 		if (data.reply && data.reply.visibility !== 'public' && data.visibility === 'public') {
 			data.visibility = 'home';
