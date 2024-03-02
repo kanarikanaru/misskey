@@ -1,7 +1,8 @@
 {
 	"name": "misskey",
-	"version": "2024.3.1-bsk-5.1.8",
+	"version": "2024.3.1-bsk-5.2.0",
 	"codename": "nasubi",
+	"codename_bsk": "a_cup_of_water",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/misskey-dev/misskey.git"
