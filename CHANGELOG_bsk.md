@@ -13,6 +13,14 @@
 -->
 
 
+## 2024.3.0-bsk-5.1.8 (waterdrop)
+### Abstract
+- [fix(backend): DBフォールバック有効時、複数のFTTソースから取得するタイムラインで取得漏れが起きる現象の修正 #13495](https://github.com/misskey-dev/misskey/pull/1349)を先行導入しました。
+
+### Server
+- Fix: FTT有効かつDBフォールバック有効時、STLのようにタイムラインのソースが複数だとFTTとDBのフォールバック間で取得されないノートがある問題
+
+
 ## 2024.3.0-bsk-5.1.7 (waterdrop)
 ### Abstract
 - Developブランチに追従しました
