@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY_IMAGE: misskey/misskey
+  REGISTRY_IMAGE: kanarikanaru/backspacekey
   TAGS: |
     type=edge
     type=ref,event=pr
