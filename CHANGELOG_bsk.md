@@ -13,6 +13,14 @@
 -->
 
 
+## 2024.3.1-bsk-5.2.0 (a_cup_of_water)
+### Abstract
+- 後述するチェリーピックにより、HTLとSTLをローカルのみに絞り込めるようになりました
+
+### General
+- [Feat: HTLとSTLをローカルのみに絞り込む機能](https://github.com/tai-cha/misskey/pull/3)
+
+
 ## 2024.3.1-bsk-5.1.8 (waterdrop)
 ### Abstract
 - Developブランチに追従しました
