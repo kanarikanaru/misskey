@@ -47,7 +47,7 @@ export const meta = {
 		bothWithRepliesAndWithFiles: {
 			message: 'Specifying both withReplies and withFiles is not supported',
 			code: 'BOTH_WITH_REPLIES_AND_WITH_FILES',
-			id: 'dfaa3eb7-8002-4cb7-bcc4-1095df46656f'
+			id: 'dfaa3eb7-8002-4cb7-bcc4-1095df46656f',
 		},
 	},
 } as const;
@@ -67,6 +67,7 @@ export const paramDef = {
 		withFiles: { type: 'boolean', default: false },
 		withRenotes: { type: 'boolean', default: true },
 		withReplies: { type: 'boolean', default: false },
+		onlyLocal: { type: 'boolean', default: false },
 	},
 	required: [],
 } as const;
@@ -113,6 +114,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 					includeLocalRenotes: ps.includeLocalRenotes,
 					withFiles: ps.withFiles,
 					withReplies: ps.withReplies,
+					onlyLocal: ps.onlyLocal,
 				}, me);
 
 				process.nextTick(() => {
@@ -152,6 +154,12 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				useDbFallback: serverSettings.enableFanoutTimelineDbFallback,
 				alwaysIncludeMyNotes: true,
 				excludePureRenotes: !ps.withRenotes,
+				noteFilter: (note) => {
+					if (ps.onlyLocal && note.user && note.user.host !== null ) {
+						return false;
+					}
+					return true;
+				},
 				dbFallback: async (untilId, sinceId, limit) => await this.getFromDb({
 					untilId,
 					sinceId,
@@ -161,6 +169,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 					includeLocalRenotes: ps.includeLocalRenotes,
 					withFiles: ps.withFiles,
 					withReplies: ps.withReplies,
+					onlyLocal: ps.onlyLocal,
 				}, me),
 			});
 
@@ -181,6 +190,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 		includeLocalRenotes: boolean,
 		withFiles: boolean,
 		withReplies: boolean,
+		onlyLocal: boolean,
 	}, me: MiLocalUser) {
 		const followees = await this.userFollowingService.getFollowees(me.id);
 		const followingChannels = await this.channelFollowingsRepository.find({
@@ -266,6 +276,10 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 
 		if (ps.withFiles) {
 			query.andWhere('note.fileIds != \'{}\'');
+		}
+
+		if (ps.onlyLocal) {
+			query.andWhere('note.userHost IS NULL');
 		}
 		//#endregion
 
