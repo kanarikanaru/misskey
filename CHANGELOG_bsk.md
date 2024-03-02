@@ -13,9 +13,13 @@
 -->
 
 
-## 2024.3.0-bsk-5.1.8 (waterdrop)
+## 2024.3.1-bsk-5.1.8 (waterdrop)
 ### Abstract
+- Developブランチに追従しました
 - [fix(backend): DBフォールバック有効時、複数のFTTソースから取得するタイムラインで取得漏れが起きる現象の修正 #13495](https://github.com/misskey-dev/misskey/pull/1349)を先行導入しました。
+
+### Client
+- Enhance: カスタム絵文字の画像読み込みに失敗した際のフォールバックをテキストか画像か選べるように
 
 ### Server
 - Fix: FTT有効かつDBフォールバック有効時、STLのようにタイムラインのソースが複数だとFTTとDBのフォールバック間で取得されないノートがある問題
