@@ -12,6 +12,23 @@
 
 -->
 
+## 2024.3.1-bsk-5.2.1 (a_cup_of_water)
+### Abstract
+- Developブランチに追従しました
+- あけおめらんかーが正常に動作する可能性があります
+
+### Client
+- Enhance: 自分のノートの添付ファイルから直接ファイルの詳細ページに飛べるように
+- Enhance: 広告がMisskeyと同一ドメインの場合はRouterで遷移するように
+- Enhance: リアクション受け入れが「いいねのみ」の場合はリアクション絵文字一覧を表示しないように
+- Fix: 一部のページ内リンクが正しく動作しない問題を修正
+- Fix: 周年の実績が閏年を考慮しない問題を修正
+- Fix: ローカルURLのプレビューポップアップが左上に表示される
+
+### Server
+- Enhance: エンドポイント`antennas/update`の必須項目を`antennaId`のみに
+-  [fix(backend): DBフォールバック有効時、複数のFTTソースから取得するタイムラインで取得漏れが起きる現象の修正 #13495](https://github.com/misskey-dev/misskey/pull/1349)の変更に追従しました
+
 
 ## 2024.3.1-bsk-5.2.0 (a_cup_of_water)
 ### Abstract
