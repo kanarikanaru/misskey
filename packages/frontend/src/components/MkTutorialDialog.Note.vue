@@ -63,7 +63,6 @@ const exampleNote = reactive<Misskey.entities.Note>({
 	reactionAcceptance: null,
 	renoteCount: 0,
 	repliesCount: 1,
-	reactionCount: 0,
 	reactions: {},
 	reactionEmojis: {},
 	fileIds: [],

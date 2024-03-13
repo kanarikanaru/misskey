@@ -3987,7 +3987,6 @@ export type components = {
       reactions: {
         [key: string]: number;
       };
-      reactionCount: number;
       renoteCount: number;
       repliesCount: number;
       uri?: string;
