@@ -1993,6 +1993,10 @@ export interface Locale extends ILocale {
      */
     "showNoteActionsOnlyHover": string;
     /**
+     * ノートのリアクション数を表示する
+     */
+    "showReactionsCount": string;
+    /**
      * 履歴はありません
      */
     "noHistory": string;
@@ -8925,6 +8929,10 @@ export interface Locale extends ILocale {
          * {n}人がリアクションしました
          */
         "reactedBySomeUsers": ParameterizedString<"n">;
+        /**
+         * {n}人がいいねしました
+         */
+        "likedBySomeUsers": ParameterizedString<"n">;
         /**
          * {n}人がリノートしました
          */
