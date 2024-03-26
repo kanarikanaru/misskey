@@ -12,6 +12,45 @@
 
 -->
 
+## 2024.3.1-bsk-5.2.2.hotfix1 (a_cup_of_water)
+### Abstract
+- Developブランチに追従しました
+- あけおめらんかーが正常に動作する可能性があります
+- /api/statsのreactionsCountは常に0を返します
+- ユーザーのプロフィールのリンク検証は利用できません
+
+### Note
+- コントロールパネル内にあるサマリープロキシの設定個所がセキュリティから全般へ変更となります。
+
+### General
+- Enhance: URLプレビューの有効化・無効化を設定できるように #13569
+- Enhance: アンテナでBotによるノートを除外できるように  
+  (Cherry-picked from https://github.com/MisskeyIO/misskey/pull/545)
+- Fix: Play作成時に設定した公開範囲が機能していない問題を修正
+- ユーザーのプロフィールのリンク検証を行わないように(再開予定)
+
+### Client
+- Enhance: 設定>プラグインのページからプラグインの簡易的なログやエラーを見られるように
+  - 実装の都合により、プラグインは１つエラーを起こした時に即時停止するようになりました
+- Enhance: ページのデザインを変更
+- Enhance: 2要素認証（ワンタイムパスワード）の入力欄を改善
+- Enhance: 「今日誕生日のフォロー中ユーザー」ウィジェットを手動でリロードできるように
+- Fix: WebGL2をサポートしないブラウザで「季節に応じた画面の演出」が有効になっているとき、Misskeyが起動できなくなる問題を修正  
+  (Cherry-picked from https://activitypub.software/TransFem-org/Sharkey/-/merge_requests/459)
+- Fix: ページタイトルでローカルユーザーとリモートユーザーの区別がつかない問題を修正  
+  (Cherry-picked from https://github.com/MisskeyIO/misskey/pull/528)
+- Fix: コードブロックのシンタックスハイライトで使用される定義ファイルをCDNから取得するように #13177
+  - CDNから取得せずMisskey本体にバンドルする場合は`pacakges/frontend/vite.config.ts`を修正してください。
+- Fix: タイムゾーンによっては、「今日誕生日のフォロー中ユーザー」ウィジェットが正しく動作しない問題を修正
+
+### Server
+- Enhance: エンドポイント`antennas/update`の必須項目を`antennaId`のみに
+- Enhance: misskey-dev/summaly@5.1.0の取り込み（プレビュー生成処理の効率化）
+- Fix: フォローリクエストを作成する際に既存のものは削除するように  
+  (Cherry-picked from https://activitypub.software/TransFem-org/Sharkey/-/merge_requests/440)
+- 公式クライアントで使われていない/api/statsのreactionsCountで0を返すように
+
+
 ## 2024.3.1-bsk-5.2.1 (a_cup_of_water)
 ### Abstract
 - Developブランチに追従しました
