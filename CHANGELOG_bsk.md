@@ -14,6 +14,14 @@
 -->
 
 
+## 2024.3.1-bsk-5.2.4 (a_cup_of_water)
+### Abstract
+- 新しい日本語フォントを導入しました
+
+### Client
+- Enhance: 5.2.3で入ったLexendに馴染む日本語フォントKiwiMaruを導入
+
+
 ## 2024.3.1-bsk-5.2.3 (a_cup_of_water)
 ### Abstract
 - Developブランチに追従しました
