@@ -97,7 +97,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</div>
 			<MkReactionsViewer :note="appearNote" :maxNumber="24" @mockUpdateMyReaction="emitUpdReaction">
 				<template #more>
-					<div :class="$style.reactionOmitted">{{ i18n.ts.more }}</div>
+					<MkA :to="`/notes/${appearNote.id}/reactions`" :class="[$style.reactionOmitted]">{{ i18n.ts.more }}</MkA>
 				</template>
 			</MkReactionsViewer>
 			<footer :class="$style.footer">
@@ -1011,9 +1011,8 @@ function emitUpdReaction(emoji: string, delta: number) {
 
 .reactionOmitted {
 	display: inline-block;
-	height: 32px;
-	margin: 2px;
-	padding: 0 6px;
+	margin-left: 8px;
 	opacity: .8;
+	font-size: 95%;
 }
 </style>
