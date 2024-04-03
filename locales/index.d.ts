@@ -569,11 +569,11 @@ export interface Locale extends ILocale {
      */
     "renoteUnmute": string;
     /**
-     * フォローを禁止
+     * ブロック
      */
     "block": string;
     /**
-     * フォロー禁止を解除
+     * ブロック解除
      */
     "unblock": string;
     /**
@@ -585,11 +585,11 @@ export interface Locale extends ILocale {
      */
     "unsuspend": string;
     /**
-     * フォローを禁止しますか？
+     * ブロックしますか？
      */
     "blockConfirm": string;
     /**
-     * フォロー禁止を解除しますか？
+     * ブロック解除しますか？
      */
     "unblockConfirm": string;
     /**
@@ -909,7 +909,7 @@ export interface Locale extends ILocale {
      */
     "silencedInstancesDescription": string;
     /**
-     * ミュートとフォロー禁止
+     * ミュートとブロック
      */
     "muteAndBlock": string;
     /**
@@ -917,7 +917,7 @@ export interface Locale extends ILocale {
      */
     "mutedUsers": string;
     /**
-     * フォローを禁止したユーザー
+     * ブロックしたユーザー
      */
     "blockedUsers": string;
     /**
@@ -7668,11 +7668,11 @@ export interface Locale extends ILocale {
          */
         "write:account": string;
         /**
-         * フォロー禁止を見る
+         * ブロックを見る
          */
         "read:blocks": string;
         /**
-         * フォロー禁止を操作する
+         * ブロックを操作する
          */
         "write:blocks": string;
         /**
