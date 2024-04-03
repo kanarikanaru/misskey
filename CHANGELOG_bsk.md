@@ -1,5 +1,6 @@
 <!--
-## 2023.x.x (unreleased)
+## 2024.x.x (unreleased)
+### Abstract
 
 ### General
 -
@@ -11,6 +12,28 @@
 -
 
 -->
+
+
+## 2024.3.1-bsk-5.2.3 (a_cup_of_water)
+### Abstract
+- Developブランチに追従しました
+- Sharkeyからいくつかコミットをチェリーピックさせていただきました
+- Backspacekeyのブロックに関わる処理が本家に取り込まれたのでブロックに名称を戻しました
+
+### General
+- 英字フォントがLexendに(Cherry-picked from [Sharkey](https://activitypub.software/TransFem-org/Sharkey/-/commit/5ae049a4af84c83b6ee8be594527a927ce4202de))
+
+### Client
+- Enhance: 映像・音声の再生にブラウザのネイティブプレイヤーを使用できるように
+- Enhance: 映像・音声の再生メニューに「再生速度」「ループ再生」「ピクチャインピクチャ」を追加
+- Enhance: 映像・音声の再生にキーボードショートカットが使えるように
+- Enhance: ノートについているリアクションの「もっと！」から、リアクションの一覧を表示できるように
+
+### Server
+- Fix: エンドポイント`notes/translate`のエラーを改善
+- Fix: CleanRemoteFilesProcessorService report progress from 100% (#13632)
+- Fix: 一部の音声ファイルが映像ファイルとして扱われる問題を修正
+
 
 ## 2024.3.1-bsk-5.2.2.hotfix1 (a_cup_of_water)
 ### Abstract
