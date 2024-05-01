@@ -14,6 +14,14 @@
 -->
 
 
+## 2024.3.1-bsk-5.3.1 (a_cup_of_water)
+### Abstract
+- 通知のアイコンに色が乗らない不具合を修正
+
+### Client
+- Fix: 通知の色指定が抜けていた問題を修正
+
+
 ## 2024.3.1-bsk-5.3.0 (a_cup_of_water)
 ### Abstract
 - Developブランチに追従
