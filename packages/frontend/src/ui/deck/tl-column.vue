@@ -86,6 +86,8 @@ watch(onlyLocal, v => {
 	updateColumn(props.column.id, {
 		onlyLocal: v,
 	});
+});
+
 watch(soundSetting, v => {
 	updateColumn(props.column.id, { soundSetting: v });
 });
