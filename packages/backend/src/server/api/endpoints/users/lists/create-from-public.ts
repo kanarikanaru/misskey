@@ -104,11 +104,11 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				throw new ApiError(meta.errors.tooManyUserLists);
 			}
 
-			const userList = await this.userListsRepository.insertOne({
+			const userList = await this.userListsRepository.insert({
 				id: this.idService.gen(),
 				userId: me.id,
 				name: ps.name,
-			} as MiUserList);
+			} as MiUserList).then(x => this.userListsRepository.findOneByOrFail(x.identifiers[0]));
 
 			const users = (await this.userListMembershipsRepository.findBy({
 				userListId: ps.listId,

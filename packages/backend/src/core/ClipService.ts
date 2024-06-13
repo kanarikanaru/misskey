@@ -45,13 +45,13 @@ export class ClipService {
 			throw new ClipService.TooManyClipsError();
 		}
 
-		const clip = await this.clipsRepository.insertOne({
+		const clip = await this.clipsRepository.insert({
 			id: this.idService.gen(),
 			userId: me.id,
 			name: name,
 			isPublic: isPublic,
 			description: description,
-		});
+		}).then(x => this.clipsRepository.findOneByOrFail(x.identifiers[0]));
 
 		return clip;
 	}

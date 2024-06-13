@@ -55,11 +55,11 @@ export class FederatedInstanceService implements OnApplicationShutdown {
 		const index = await this.instancesRepository.findOneBy({ host });
 
 		if (index == null) {
-			const i = await this.instancesRepository.insertOne({
+			const i = await this.instancesRepository.insert({
 				id: this.idService.gen(),
 				host,
 				firstRetrievedAt: new Date(),
-			});
+			}).then(x => this.instancesRepository.findOneByOrFail(x.identifiers[0]));
 
 			this.federatedInstanceCache.set(host, i);
 			return i;

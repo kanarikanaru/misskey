@@ -55,10 +55,10 @@ export class AvatarDecorationService implements OnApplicationShutdown {
 
 	@bindThis
 	public async create(options: Partial<MiAvatarDecoration>, moderator?: MiUser): Promise<MiAvatarDecoration> {
-		const created = await this.avatarDecorationsRepository.insertOne({
+		const created = await this.avatarDecorationsRepository.insert({
 			id: this.idService.gen(),
 			...options,
-		});
+		}).then(x => this.avatarDecorationsRepository.findOneByOrFail(x.identifiers[0]));
 
 		this.globalEventService.publishInternalEvent('avatarDecorationCreated', created);
 
