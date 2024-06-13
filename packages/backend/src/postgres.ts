@@ -85,7 +85,7 @@ import { bindThis } from '@/decorators.js';
 
 export const dbLogger = new MisskeyLogger('db');
 
-const sqlLogger = dbLogger.createSubLogger('sql', 'gray');
+const sqlLogger = dbLogger.createSubLogger('sql', 'gray', false);
 
 class MyCustomLogger implements Logger {
 	@bindThis
