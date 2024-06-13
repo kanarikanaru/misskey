@@ -103,7 +103,7 @@ export class ApiCallService implements OnApplicationShutdown {
 		}
 	}
 
-	#onExecError(ep: IEndpoint, data: any, err: Error, userId?: MiUser['id']): void {
+	#onExecError(ep: IEndpoint, data: any, err: Error): void {
 		if (err instanceof ApiError || err instanceof AuthenticationError) {
 			throw err;
 		} else {
@@ -118,12 +118,10 @@ export class ApiCallService implements OnApplicationShutdown {
 					id: errId,
 				},
 			});
+			console.error(err, errId);
 
 			if (this.config.sentryForBackend) {
 				Sentry.captureMessage(`Internal error occurred in ${ep.name}: ${err.message}`, {
-					user: {
-						id: userId,
-					},
 					extra: {
 						ep: ep.name,
 						ps: data,
@@ -427,13 +425,9 @@ export class ApiCallService implements OnApplicationShutdown {
 
 		// API invoking
 		if (this.config.sentryForBackend) {
-			return await Sentry.startSpan({
-				name: 'API: ' + ep.name,
-			}, () => ep.exec(data, user, token, file, request.ip, request.headers)
-				.catch((err: Error) => this.#onExecError(ep, data, err, user?.id)));
+			return await Sentry.startSpan({ name: 'API: ' + ep.name }, () => ep.exec(data, user, token, file, request.ip, request.headers).catch((err: Error) => this.#onExecError(ep, data, err)));
 		} else {
-			return await ep.exec(data, user, token, file, request.ip, request.headers)
-				.catch((err: Error) => this.#onExecError(ep, data, err, user?.id));
+			return await ep.exec(data, user, token, file, request.ip, request.headers).catch((err: Error) => this.#onExecError(ep, data, err));
 		}
 	}
 
