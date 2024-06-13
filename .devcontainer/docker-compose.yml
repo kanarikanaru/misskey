@@ -8,6 +8,7 @@ services:
 
     volumes:
       - ../:/workspace:cached
+      - node_modules:/workspace/node_modules
 
     command: sleep infinity
 
@@ -62,6 +63,7 @@ volumes:
   postgres-data:
   redis-data:
   meilisearch-data:
+  node_modules:
 
 networks:
   internal_network:
