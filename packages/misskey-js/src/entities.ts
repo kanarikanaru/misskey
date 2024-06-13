@@ -132,23 +132,8 @@ export type ModerationLog = {
 	type: 'unsetUserAvatar';
 	info: ModerationLogPayloads['unsetUserAvatar'];
 } | {
-	type: 'createSystemWebhook';
-	info: ModerationLogPayloads['createSystemWebhook'];
-} | {
-	type: 'updateSystemWebhook';
-	info: ModerationLogPayloads['updateSystemWebhook'];
-} | {
-	type: 'deleteSystemWebhook';
-	info: ModerationLogPayloads['deleteSystemWebhook'];
-} | {
-	type: 'createAbuseReportNotificationRecipient';
-	info: ModerationLogPayloads['createAbuseReportNotificationRecipient'];
-} | {
-	type: 'updateAbuseReportNotificationRecipient';
-	info: ModerationLogPayloads['updateAbuseReportNotificationRecipient'];
-} | {
-	type: 'deleteAbuseReportNotificationRecipient';
-	info: ModerationLogPayloads['deleteAbuseReportNotificationRecipient'];
+	type: 'unsetUserBanner';
+	info: ModerationLogPayloads['unsetUserBanner'];
 });
 
 export type ServerStats = {

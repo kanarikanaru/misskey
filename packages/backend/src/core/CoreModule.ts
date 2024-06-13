@@ -5,13 +5,6 @@
 
 import { Module } from '@nestjs/common';
 import { FanoutTimelineEndpointService } from '@/core/FanoutTimelineEndpointService.js';
-import { AbuseReportService } from '@/core/AbuseReportService.js';
-import { SystemWebhookEntityService } from '@/core/entities/SystemWebhookEntityService.js';
-import {
-	AbuseReportNotificationRecipientEntityService,
-} from '@/core/entities/AbuseReportNotificationRecipientEntityService.js';
-import { AbuseReportNotificationService } from '@/core/AbuseReportNotificationService.js';
-import { SystemWebhookService } from '@/core/SystemWebhookService.js';
 import { AccountMoveService } from './AccountMoveService.js';
 import { AccountUpdateService } from './AccountUpdateService.js';
 import { AiService } from './AiService.js';
@@ -63,7 +56,7 @@ import { UserMutingService } from './UserMutingService.js';
 import { UserSuspendService } from './UserSuspendService.js';
 import { UserAuthService } from './UserAuthService.js';
 import { VideoProcessingService } from './VideoProcessingService.js';
-import { UserWebhookService } from './UserWebhookService.js';
+import { WebhookService } from './WebhookService.js';
 import { ProxyAccountService } from './ProxyAccountService.js';
 import { UtilityService } from './UtilityService.js';
 import { FileInfoService } from './FileInfoService.js';
@@ -151,8 +144,6 @@ import type { Provider } from '@nestjs/common';
 
 //#region 文字列ベースでのinjection用(循環参照対応のため)
 const $LoggerService: Provider = { provide: 'LoggerService', useExisting: LoggerService };
-const $AbuseReportService: Provider = { provide: 'AbuseReportService', useExisting: AbuseReportService };
-const $AbuseReportNotificationService: Provider = { provide: 'AbuseReportNotificationService', useExisting: AbuseReportNotificationService };
 const $AccountMoveService: Provider = { provide: 'AccountMoveService', useExisting: AccountMoveService };
 const $AccountUpdateService: Provider = { provide: 'AccountUpdateService', useExisting: AccountUpdateService };
 const $AiService: Provider = { provide: 'AiService', useExisting: AiService };
@@ -205,8 +196,7 @@ const $UserMutingService: Provider = { provide: 'UserMutingService', useExisting
 const $UserSuspendService: Provider = { provide: 'UserSuspendService', useExisting: UserSuspendService };
 const $UserAuthService: Provider = { provide: 'UserAuthService', useExisting: UserAuthService };
 const $VideoProcessingService: Provider = { provide: 'VideoProcessingService', useExisting: VideoProcessingService };
-const $UserWebhookService: Provider = { provide: 'UserWebhookService', useExisting: UserWebhookService };
-const $SystemWebhookService: Provider = { provide: 'SystemWebhookService', useExisting: SystemWebhookService };
+const $WebhookService: Provider = { provide: 'WebhookService', useExisting: WebhookService };
 const $UtilityService: Provider = { provide: 'UtilityService', useExisting: UtilityService };
 const $FileInfoService: Provider = { provide: 'FileInfoService', useExisting: FileInfoService };
 const $SearchService: Provider = { provide: 'SearchService', useExisting: SearchService };
@@ -235,7 +225,6 @@ const $ChartManagementService: Provider = { provide: 'ChartManagementService', u
 
 const $AbuseUserReportEntityService: Provider = { provide: 'AbuseUserReportEntityService', useExisting: AbuseUserReportEntityService };
 const $AnnouncementEntityService: Provider = { provide: 'AnnouncementEntityService', useExisting: AnnouncementEntityService };
-const $AbuseReportNotificationRecipientEntityService: Provider = { provide: 'AbuseReportNotificationRecipientEntityService', useExisting: AbuseReportNotificationRecipientEntityService };
 const $AntennaEntityService: Provider = { provide: 'AntennaEntityService', useExisting: AntennaEntityService };
 const $AppEntityService: Provider = { provide: 'AppEntityService', useExisting: AppEntityService };
 const $AuthSessionEntityService: Provider = { provide: 'AuthSessionEntityService', useExisting: AuthSessionEntityService };
@@ -269,7 +258,6 @@ const $FlashLikeEntityService: Provider = { provide: 'FlashLikeEntityService', u
 const $RoleEntityService: Provider = { provide: 'RoleEntityService', useExisting: RoleEntityService };
 const $ReversiGameEntityService: Provider = { provide: 'ReversiGameEntityService', useExisting: ReversiGameEntityService };
 const $MetaEntityService: Provider = { provide: 'MetaEntityService', useExisting: MetaEntityService };
-const $SystemWebhookEntityService: Provider = { provide: 'SystemWebhookEntityService', useExisting: SystemWebhookEntityService };
 
 const $ApAudienceService: Provider = { provide: 'ApAudienceService', useExisting: ApAudienceService };
 const $ApDbResolverService: Provider = { provide: 'ApDbResolverService', useExisting: ApDbResolverService };
@@ -297,8 +285,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 	],
 	providers: [
 		LoggerService,
-		AbuseReportService,
-		AbuseReportNotificationService,
 		AccountMoveService,
 		AccountUpdateService,
 		AiService,
@@ -351,8 +337,7 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		UserSuspendService,
 		UserAuthService,
 		VideoProcessingService,
-		UserWebhookService,
-		SystemWebhookService,
+		WebhookService,
 		UtilityService,
 		FileInfoService,
 		SearchService,
@@ -381,7 +366,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		AbuseUserReportEntityService,
 		AnnouncementEntityService,
-		AbuseReportNotificationRecipientEntityService,
 		AntennaEntityService,
 		AppEntityService,
 		AuthSessionEntityService,
@@ -415,7 +399,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		RoleEntityService,
 		ReversiGameEntityService,
 		MetaEntityService,
-		SystemWebhookEntityService,
 
 		ApAudienceService,
 		ApDbResolverService,
@@ -439,8 +422,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		//#region 文字列ベースでのinjection用(循環参照対応のため)
 		$LoggerService,
-		$AbuseReportService,
-		$AbuseReportNotificationService,
 		$AccountMoveService,
 		$AccountUpdateService,
 		$AiService,
@@ -493,8 +474,7 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		$UserSuspendService,
 		$UserAuthService,
 		$VideoProcessingService,
-		$UserWebhookService,
-		$SystemWebhookService,
+		$WebhookService,
 		$UtilityService,
 		$FileInfoService,
 		$SearchService,
@@ -523,7 +503,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		$AbuseUserReportEntityService,
 		$AnnouncementEntityService,
-		$AbuseReportNotificationRecipientEntityService,
 		$AntennaEntityService,
 		$AppEntityService,
 		$AuthSessionEntityService,
@@ -557,7 +536,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		$RoleEntityService,
 		$ReversiGameEntityService,
 		$MetaEntityService,
-		$SystemWebhookEntityService,
 
 		$ApAudienceService,
 		$ApDbResolverService,
@@ -582,8 +560,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 	exports: [
 		QueueModule,
 		LoggerService,
-		AbuseReportService,
-		AbuseReportNotificationService,
 		AccountMoveService,
 		AccountUpdateService,
 		AiService,
@@ -636,8 +612,7 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		UserSuspendService,
 		UserAuthService,
 		VideoProcessingService,
-		UserWebhookService,
-		SystemWebhookService,
+		WebhookService,
 		UtilityService,
 		FileInfoService,
 		SearchService,
@@ -665,7 +640,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		AbuseUserReportEntityService,
 		AnnouncementEntityService,
-		AbuseReportNotificationRecipientEntityService,
 		AntennaEntityService,
 		AppEntityService,
 		AuthSessionEntityService,
@@ -699,7 +673,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		RoleEntityService,
 		ReversiGameEntityService,
 		MetaEntityService,
-		SystemWebhookEntityService,
 
 		ApAudienceService,
 		ApDbResolverService,
@@ -723,8 +696,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		//#region 文字列ベースでのinjection用(循環参照対応のため)
 		$LoggerService,
-		$AbuseReportService,
-		$AbuseReportNotificationService,
 		$AccountMoveService,
 		$AccountUpdateService,
 		$AiService,
@@ -777,8 +748,7 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		$UserSuspendService,
 		$UserAuthService,
 		$VideoProcessingService,
-		$UserWebhookService,
-		$SystemWebhookService,
+		$WebhookService,
 		$UtilityService,
 		$FileInfoService,
 		$SearchService,
@@ -806,7 +776,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 
 		$AbuseUserReportEntityService,
 		$AnnouncementEntityService,
-		$AbuseReportNotificationRecipientEntityService,
 		$AntennaEntityService,
 		$AppEntityService,
 		$AuthSessionEntityService,
@@ -840,7 +809,6 @@ const $ApQuestionService: Provider = { provide: 'ApQuestionService', useExisting
 		$RoleEntityService,
 		$ReversiGameEntityService,
 		$MetaEntityService,
-		$SystemWebhookEntityService,
 
 		$ApAudienceService,
 		$ApDbResolverService,

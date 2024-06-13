@@ -38,7 +38,7 @@ import InstanceChart from '@/core/chart/charts/instance.js';
 import ActiveUsersChart from '@/core/chart/charts/active-users.js';
 import { GlobalEventService } from '@/core/GlobalEventService.js';
 import { NotificationService } from '@/core/NotificationService.js';
-import { UserWebhookService } from '@/core/UserWebhookService.js';
+import { WebhookService } from '@/core/WebhookService.js';
 import { HashtagService } from '@/core/HashtagService.js';
 import { AntennaService } from '@/core/AntennaService.js';
 import { QueueService } from '@/core/QueueService.js';
@@ -205,7 +205,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 		private federatedInstanceService: FederatedInstanceService,
 		private hashtagService: HashtagService,
 		private antennaService: AntennaService,
-		private webhookService: UserWebhookService,
+		private webhookService: WebhookService,
 		private featuredService: FeaturedService,
 		private remoteUserResolveService: RemoteUserResolveService,
 		private apDeliverManagerService: ApDeliverManagerService,
@@ -611,7 +611,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 			this.webhookService.getActiveWebhooks().then(webhooks => {
 				webhooks = webhooks.filter(x => x.userId === user.id && x.on.includes('note'));
 				for (const webhook of webhooks) {
-					this.queueService.userWebhookDeliver(webhook, 'note', {
+					this.queueService.webhookDeliver(webhook, 'note', {
 						note: noteObj,
 					});
 				}
@@ -638,7 +638,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 
 						const webhooks = (await this.webhookService.getActiveWebhooks()).filter(x => x.userId === data.reply!.userId && x.on.includes('reply'));
 						for (const webhook of webhooks) {
-							this.queueService.userWebhookDeliver(webhook, 'reply', {
+							this.queueService.webhookDeliver(webhook, 'reply', {
 								note: noteObj,
 							});
 						}
@@ -661,7 +661,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 
 					const webhooks = (await this.webhookService.getActiveWebhooks()).filter(x => x.userId === data.renote!.userId && x.on.includes('renote'));
 					for (const webhook of webhooks) {
-						this.queueService.userWebhookDeliver(webhook, 'renote', {
+						this.queueService.webhookDeliver(webhook, 'renote', {
 							note: noteObj,
 						});
 					}
@@ -793,7 +793,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 
 			const webhooks = (await this.webhookService.getActiveWebhooks()).filter(x => x.userId === u.id && x.on.includes('mention'));
 			for (const webhook of webhooks) {
-				this.queueService.userWebhookDeliver(webhook, 'mention', {
+				this.queueService.webhookDeliver(webhook, 'mention', {
 					note: detailPackedNote,
 				});
 			}

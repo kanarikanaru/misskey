@@ -29,7 +29,6 @@ import { bindThis } from '@/decorators.js';
 import type { MiRemoteUser } from '@/models/User.js';
 import { isNotNull } from '@/misc/is-not-null.js';
 import { GlobalEventService } from '@/core/GlobalEventService.js';
-import { AbuseReportService } from '@/core/AbuseReportService.js';
 import { getApHrefNullable, getApId, getApIds, getApType, isAccept, isActor, isAdd, isAnnounce, isBlock, isCollection, isCollectionOrOrderedCollection, isCreate, isDelete, isFlag, isFollow, isLike, isMove, isPost, isReject, isRemove, isTombstone, isUndo, isUpdate, validActor, validPost } from './type.js';
 import { ApNoteService } from './models/ApNoteService.js';
 import { ApLoggerService } from './ApLoggerService.js';
@@ -58,6 +57,9 @@ export class ApInboxService {
 		@Inject(DI.followingsRepository)
 		private followingsRepository: FollowingsRepository,
 
+		@Inject(DI.abuseUserReportsRepository)
+		private abuseUserReportsRepository: AbuseUserReportsRepository,
+
 		@Inject(DI.followRequestsRepository)
 		private followRequestsRepository: FollowRequestsRepository,
 
@@ -66,7 +68,6 @@ export class ApInboxService {
 		private utilityService: UtilityService,
 		private idService: IdService,
 		private metaService: MetaService,
-		private abuseReportService: AbuseReportService,
 		private userFollowingService: UserFollowingService,
 		private apAudienceService: ApAudienceService,
 		private reactionService: ReactionService,
@@ -544,13 +545,14 @@ export class ApInboxService {
 		});
 		if (users.length < 1) return 'skip';
 
-		await this.abuseReportService.report([{
+		await this.abuseUserReportsRepository.insert({
+			id: this.idService.gen(),
 			targetUserId: users[0].id,
 			targetUserHost: users[0].host,
 			reporterId: actor.id,
 			reporterHost: actor.host,
 			comment: `${activity.content}\n${JSON.stringify(uris, null, 2)}`,
-		}]);
+		});
 
 		return 'ok';
 	}
