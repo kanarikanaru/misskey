@@ -17,10 +17,12 @@ services:
       - external_network
 
   redis:
-    restart: unless-stopped
-    image: redis:7-alpine
+    restart: always
+    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
     networks:
       - internal_network
+    ulimits:
+      memlock: -1
     volumes:
       - redis-data:/data
     healthcheck:
