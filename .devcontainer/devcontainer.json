@@ -1,6 +1,6 @@
 {
-	"name": "BackspaceKey",
-	"dockerComposeFile": "docker-compose.yml",
+	"name": "Backspacekey",
+	"dockerComposeFile": "compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
 	"features": {

@@ -466,7 +466,7 @@ function setVisibility() {
 		return;
 	}
 
-	os.popup(defineAsyncComponent(() => import('@/components/MkVisibilityPicker.vue')), {
+	const { dispose } = os.popup(defineAsyncComponent(() => import('@/components/MkVisibilityPicker.vue')), {
 		currentVisibility: visibility.value,
 		isSilenced: $i.isSilenced,
 		localOnly: localOnly.value,
@@ -479,7 +479,8 @@ function setVisibility() {
 				defaultStore.set('visibility', visibility.value);
 			}
 		},
-	}, 'closed');
+		closed: () => dispose(),
+	});
 }
 
 async function toggleLocalOnly() {
@@ -572,6 +573,7 @@ function clear() {
 
 function onKeydown(ev: KeyboardEvent) {
 	if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey) && canPost.value) post();
+
 	if (ev.key === 'Escape') emit('esc');
 }
 
@@ -627,8 +629,8 @@ async function onPaste(ev: ClipboardEvent) {
 				return;
 			}
 
-			const fileName = formatTimeString(new Date(), defaultStore.state.pastedFileName).replace(/{{number}}/g, "0");
-			const file = new File([paste], `${fileName}.txt`, { type: "text/plain" });
+			const fileName = formatTimeString(new Date(), defaultStore.state.pastedFileName).replace(/{{number}}/g, '0');
+			const file = new File([paste], `${fileName}.txt`, { type: 'text/plain' });
 			upload(file, `${fileName}.txt`);
 		});
 	}
@@ -734,7 +736,9 @@ async function post(ev?: MouseEvent) {
 			const rect = el.getBoundingClientRect();
 			const x = rect.left + (el.offsetWidth / 2);
 			const y = rect.top + (el.offsetHeight / 2);
-			os.popup(MkRippleEffect, { x, y }, {}, 'end');
+			const { dispose } = os.popup(MkRippleEffect, { x, y }, {
+				end: () => dispose(),
+			});
 		}
 	}
 
@@ -1084,6 +1088,15 @@ defineExpose({
 .submit {
 	margin: 12px 12px 12px 6px;
 	vertical-align: bottom;
+
+	&:focus-visible {
+		outline: none;
+
+		.submitInner {
+			outline: 2px solid var(--fgOnAccent);
+			outline-offset: -4px;
+		}
+	}
 
 	&:disabled {
 		opacity: 0.7;
