@@ -481,7 +481,7 @@ onDeactivated(() => {
 	position: relative;
 	overflow: clip;
 
-	&:focus-visible {
+	&:focus {
 		outline: none;
 	}
 }
@@ -588,10 +588,6 @@ onDeactivated(() => {
 	border-radius: 99rem;
 
 	font-size: 1.1rem;
-
-	&:focus-visible {
-		outline: none;
-	}
 }
 
 .videoLoading {
@@ -654,10 +650,6 @@ onDeactivated(() => {
 
 		&:hover {
 			background-color: var(--accent);
-		}
-
-		&:focus-visible {
-			outline: none;
 		}
 	}
 }

@@ -286,7 +286,6 @@ definePageMetadata(() => ({
 		background-color: var(--accentedBg);
 		color: var(--accent);
 		text-decoration: none;
-		outline: none;
 	}
 }
 

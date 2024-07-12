@@ -10,7 +10,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 	ref="rootEl"
 	v-hotkey="keymap"
 	:class="$style.root"
-	:tabindex="isDeleted ? '-1' : '0'"
 >
 	<div v-if="appearNote.reply && appearNote.reply.replyId">
 		<div v-if="!conversationLoaded" style="padding: 16px">
@@ -32,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</I18n>
 		</span>
 		<div :class="$style.renoteInfo">
-			<button ref="renoteTime" class="_button" :class="$style.renoteTime" @mousedown.prevent="showRenoteMenu()">
+			<button ref="renoteTime" class="_button" :class="$style.renoteTime" @click="showRenoteMenu()">
 				<i v-if="isMyRenote" class="ti ti-dots" style="margin-right: 4px;"></i>
 				<MkTime :time="note.createdAt"/>
 			</button>
@@ -93,7 +92,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					</div>
 				</div>
 				<div v-if="appearNote.files && appearNote.files.length > 0">
-					<MkMediaList ref="galleryEl" :mediaList="appearNote.files"/>
+					<MkMediaList :mediaList="appearNote.files"/>
 				</div>
 				<MkPoll v-if="appearNote.poll" ref="pollViewer" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll"/>
 				<div v-if="isEnabledUrlPreview">
@@ -119,7 +118,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 				ref="renoteButton"
 				class="_button"
 				:class="$style.noteFooterButton"
-				@mousedown.prevent="renote()"
+				@mousedown="renote()"
 			>
 				<i class="ti ti-repeat"></i>
 				<p v-if="appearNote.renoteCount > 0" :class="$style.noteFooterButtonCount">{{ appearNote.renoteCount }}</p>
@@ -134,10 +133,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 			<button v-if="appearNote.myReaction != null" ref="reactButton" class="_button" :class="[$style.noteFooterButton, $style.reacted]" @click="undoReact(appearNote)">
 				<i class="ti ti-minus"></i>
 			</button>
-			<button v-if="defaultStore.state.showClipButtonInNoteFooter" ref="clipButton" class="_button" :class="$style.noteFooterButton" @mousedown.prevent="clip()">
+			<button v-if="defaultStore.state.showClipButtonInNoteFooter" ref="clipButton" class="_button" :class="$style.noteFooterButton" @mousedown="clip()">
 				<i class="ti ti-paperclip"></i>
 			</button>
-			<button ref="menuButton" class="_button" :class="$style.noteFooterButton" @mousedown.prevent="showMenu()">
+			<button ref="menuButton" class="_button" :class="$style.noteFooterButton" @mousedown="showMenu()">
 				<i class="ti ti-dots"></i>
 			</button>
 		</footer>
@@ -281,7 +280,6 @@ const renoteTime = shallowRef<HTMLElement>();
 const reactButton = shallowRef<HTMLElement>();
 const clipButton = shallowRef<HTMLElement>();
 const appearNote = computed(() => isRenote ? note.value.renote as Misskey.entities.Note : note.value);
-const galleryEl = shallowRef<InstanceType<typeof MkMediaList>>();
 const isMyRenote = $i && ($i.id === note.value.userId);
 const showContent = ref(false);
 const isDeleted = ref(false);
@@ -304,7 +302,6 @@ const keymap = {
 		if (!defaultStore.state.showClipButtonInNoteFooter) return;
 		clip();
 	},
-	'o': () => galleryEl.value?.openGallery(),
 	'v|enter': () => {
 		if (appearNote.value.cw != null) {
 			showContent.value = !showContent.value;
@@ -394,26 +391,29 @@ if (appearNote.value.reactionAcceptance === 'likeOnly') {
 	});
 }
 
-function renote() {
+function renote(viaKeyboard = false) {
 	pleaseLogin();
 	showMovedDialog();
 
 	const { menu } = getRenoteMenu({ note: note.value, renoteButton });
-	os.popupMenu(menu, renoteButton.value);
+	os.popupMenu(menu, renoteButton.value, {
+		viaKeyboard,
+	});
 }
 
-function reply(): void {
+function reply(viaKeyboard = false): void {
 	pleaseLogin();
 	showMovedDialog();
 	os.post({
 		reply: appearNote.value,
 		channel: appearNote.value.channel,
+		animation: !viaKeyboard,
 	}).then(() => {
 		focus();
 	});
 }
 
-function react(): void {
+function react(viaKeyboard = false): void {
 	pleaseLogin();
 	showMovedDialog();
 	if (appearNote.value.reactionAcceptance === 'likeOnly') {
@@ -423,7 +423,7 @@ function react(): void {
 			noteId: appearNote.value.id,
 			reaction: '❤️',
 		});
-		const el = reactButton.value;
+		const el = reactButton.value as HTMLElement | null | undefined;
 		if (el) {
 			const rect = el.getBoundingClientRect();
 			const x = rect.left + (el.offsetWidth / 2);
@@ -479,16 +479,18 @@ function onContextmenu(ev: MouseEvent): void {
 	}
 }
 
-function showMenu(): void {
+function showMenu(viaKeyboard = false): void {
 	const { menu, cleanup } = getNoteMenu({ note: note.value, translating, translation, isDeleted });
-	os.popupMenu(menu, menuButton.value).then(focus).finally(cleanup);
+	os.popupMenu(menu, menuButton.value, {
+		viaKeyboard,
+	}).then(focus).finally(cleanup);
 }
 
-async function clip(): Promise<void> {
+async function clip() {
 	os.popupMenu(await getNoteClipMenu({ note: note.value, isDeleted }), clipButton.value).then(focus);
 }
 
-function showRenoteMenu(): void {
+function showRenoteMenu(viaKeyboard = false): void {
 	if (!isMyRenote) return;
 	pleaseLogin();
 	os.popupMenu([{
@@ -501,7 +503,9 @@ function showRenoteMenu(): void {
 			});
 			isDeleted.value = true;
 		},
-	}], renoteTime.value);
+	}], renoteTime.value, {
+		viaKeyboard: viaKeyboard,
+	});
 }
 
 function focus() {
@@ -543,28 +547,6 @@ function loadConversation() {
 	transition: box-shadow 0.1s ease;
 	overflow: clip;
 	contain: content;
-
-	&:focus-visible {
-		outline: none;
-
-		&::after {
-			content: "";
-			pointer-events: none;
-			display: block;
-			position: absolute;
-			z-index: 10;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			margin: auto;
-			width: calc(100% - 8px);
-			height: calc(100% - 8px);
-			border: dashed 2px var(--focus);
-			border-radius: var(--radius);
-			box-sizing: border-box;
-		}
-	}
 }
 
 .replyTo {

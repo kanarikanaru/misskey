@@ -250,6 +250,7 @@ function onMousedown(evt: MouseEvent): void {
 	}
 
 	&:focus-visible {
+		outline: solid 2px var(--focus);
 		outline-offset: 2px;
 	}
 

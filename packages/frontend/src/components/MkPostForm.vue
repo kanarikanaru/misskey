@@ -573,7 +573,6 @@ function clear() {
 
 function onKeydown(ev: KeyboardEvent) {
 	if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey) && canPost.value) post();
-
 	if (ev.key === 'Escape') emit('esc');
 }
 
@@ -1088,15 +1087,6 @@ defineExpose({
 .submit {
 	margin: 12px 12px 12px 6px;
 	vertical-align: bottom;
-
-	&:focus-visible {
-		outline: none;
-
-		.submitInner {
-			outline: 2px solid var(--fgOnAccent);
-			outline-offset: -4px;
-		}
-	}
 
 	&:disabled {
 		opacity: 0.7;

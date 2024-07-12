@@ -185,7 +185,17 @@ onBeforeUnmount(() => {
 	}
 
 	&:focus-visible {
-		outline-offset: 2px;
+		&:after {
+			content: "";
+			pointer-events: none;
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			bottom: -5px;
+			left: -5px;
+			border: 2px solid var(--focus);
+			border-radius: 32px;
+		}
 	}
 
 	&:hover {

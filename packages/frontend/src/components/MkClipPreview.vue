@@ -40,14 +40,6 @@ const remaining = computed(() => {
 .link {
 	display: block;
 
-	&:focus-visible {
-		outline: none;
-
-		.root {
-			box-shadow: inset 0 0 0 2px var(--focus);
-		}
-	}
-
 	&:hover {
 		text-decoration: none;
 		color: var(--accent);

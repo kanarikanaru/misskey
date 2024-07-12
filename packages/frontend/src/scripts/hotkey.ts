@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: syuilo and misskey-project
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { getHTMLElementOrNull } from "@/scripts/get-dom-node-or-null.js";
 
 //#region types
 export type Keymap = Record<string, CallbackFunction | CallbackObject>;
@@ -31,8 +30,8 @@ type Action = {
 //#region consts
 const KEY_ALIASES = {
 	'esc': 'Escape',
-	'enter': 'Enter',
-	'space': ' ',
+	'enter': ['Enter', 'NumpadEnter'],
+	'space': [' ', 'Spacebar'],
 	'up': 'ArrowUp',
 	'down': 'ArrowDown',
 	'left': 'ArrowLeft',
@@ -45,10 +44,6 @@ const MODIFIER_KEYS = ['ctrl', 'alt', 'shift'];
 const IGNORE_ELEMENTS = ['input', 'textarea'];
 //#endregion
 
-//#region store
-let latestHotkey: Pattern & { callback: CallbackFunction } | null = null;
-//#endregion
-
 //#region impl
 export const makeHotkey = (keymap: Keymap) => {
 	const actions = parseKeymap(keymap);
@@ -56,14 +51,13 @@ export const makeHotkey = (keymap: Keymap) => {
 		if ('pswp' in window && window.pswp != null) return;
 		if (document.activeElement != null) {
 			if (IGNORE_ELEMENTS.includes(document.activeElement.tagName.toLowerCase())) return;
-			if (getHTMLElementOrNull(document.activeElement)?.isContentEditable) return;
+			if ((document.activeElement as HTMLElement).isContentEditable) return;
 		}
-		for (const action of actions) {
-			if (matchPatterns(ev, action)) {
+		for (const { patterns, callback, options } of actions) {
+			if (matchPatterns(ev, patterns, options)) {
 				ev.preventDefault();
 				ev.stopPropagation();
-				action.callback(ev);
-				storePattern(ev, action.callback);
+				callback(ev);
 			}
 		}
 	};
@@ -108,47 +102,16 @@ const parseOptions = (rawCallback: Keymap[keyof Keymap]) => {
 	return { ...defaultOptions } as const satisfies Action['options'];
 };
 
-const matchPatterns = (ev: KeyboardEvent, action: Action) => {
-	const { patterns, options, callback } = action;
+const matchPatterns = (ev: KeyboardEvent, patterns: Action['patterns'], options: Action['options']) => {
 	if (ev.repeat && !options.allowRepeat) return false;
 	const key = ev.key.toLowerCase();
 	return patterns.some(({ which, ctrl, shift, alt }) => {
-		if (
-			latestHotkey != null &&
-			latestHotkey.which.includes(key) &&
-			latestHotkey.ctrl === ctrl &&
-			latestHotkey.alt === alt &&
-			latestHotkey.shift === shift &&
-			latestHotkey.callback === callback
-		) {
-			return false;
-		}
 		if (!which.includes(key)) return false;
 		if (ctrl !== (ev.ctrlKey || ev.metaKey)) return false;
 		if (alt !== ev.altKey) return false;
 		if (shift !== ev.shiftKey) return false;
 		return true;
 	});
-};
-
-let lastHotKeyStoreTimer: number | null = null;
-
-const storePattern = (ev: KeyboardEvent, callback: CallbackFunction) => {
-	if (lastHotKeyStoreTimer != null) {
-		clearTimeout(lastHotKeyStoreTimer);
-	}
-
-	latestHotkey = {
-		which: [ev.key.toLowerCase()],
-		ctrl: ev.ctrlKey || ev.metaKey,
-		alt: ev.altKey,
-		shift: ev.shiftKey,
-		callback,
-	};
-
-	lastHotKeyStoreTimer = window.setTimeout(() => {
-		latestHotkey = null;
-	}, 500);
 };
 
 const parseKeyCode = (input?: string | null) => {

@@ -13,7 +13,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 	:manualShowing="manualShowing"
 	:src="src"
 	@click="modal?.close()"
-	@esc="modal?.close()"
 	@opening="opening"
 	@close="emit('close')"
 	@closed="emit('closed')"
@@ -29,7 +28,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 		:asDrawer="type === 'drawer'"
 		:max-height="maxHeight"
 		@chosen="chosen"
-		@esc="modal?.close()"
 	/>
 </MkModal>
 </template>

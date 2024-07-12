@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	ref="rootEl"
 	v-hotkey="keymap"
 	:class="[$style.root, { [$style.showActionsOnlyHover]: defaultStore.state.showNoteActionsOnlyHover }]"
-	:tabindex="isDeleted ? '-1' : '0'"
+	:tabindex="!isDeleted ? '-1' : undefined"
 >
 	<MkNoteSub v-if="appearNote.reply && !renoteCollapsed" :note="appearNote.reply" :class="$style.replyTo"/>
 	<div v-if="pinned" :class="$style.tip"><i class="ti ti-pin"></i> {{ i18n.ts.pinnedNote }}</div>
@@ -28,7 +28,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</template>
 		</I18n>
 		<div :class="$style.renoteInfo">
-			<button ref="renoteTime" :class="$style.renoteTime" class="_button" @mousedown.prevent="showRenoteMenu()">
+			<button ref="renoteTime" :class="$style.renoteTime" class="_button" @click="showRenoteMenu()">
 				<i class="ti ti-dots" :class="$style.renoteMenu"></i>
 				<MkTime :time="note.createdAt"/>
 			</button>
@@ -79,7 +79,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 						</div>
 					</div>
 					<div v-if="appearNote.files && appearNote.files.length > 0">
-						<MkMediaList ref="galleryEl" :mediaList="appearNote.files"/>
+						<MkMediaList :mediaList="appearNote.files"/>
 					</div>
 					<MkPoll v-if="appearNote.poll" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll"/>
 					<div v-if="isEnabledUrlPreview">
@@ -110,7 +110,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					ref="renoteButton"
 					:class="$style.footerButton"
 					class="_button"
-					@mousedown.prevent="renote()"
+					@mousedown="renote()"
 				>
 					<i class="ti ti-repeat"></i>
 					<p v-if="appearNote.renoteCount > 0" :class="$style.footerButtonCount">{{ appearNote.renoteCount }}</p>
@@ -125,10 +125,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 				<button v-if="appearNote.myReaction != null" ref="reactButton" :class="$style.footerButton" class="_button" @click="undoReact(appearNote)">
 					<i class="ti ti-minus"></i>
 				</button>
-				<button v-if="defaultStore.state.showClipButtonInNoteFooter" ref="clipButton" :class="$style.footerButton" class="_button" @mousedown.prevent="clip()">
+				<button v-if="defaultStore.state.showClipButtonInNoteFooter" ref="clipButton" :class="$style.footerButton" class="_button" @mousedown="clip()">
 					<i class="ti ti-paperclip"></i>
 				</button>
-				<button ref="menuButton" :class="$style.footerButton" class="_button" @mousedown.prevent="showMenu()">
+				<button ref="menuButton" :class="$style.footerButton" class="_button" @mousedown="showMenu()">
 					<i class="ti ti-dots"></i>
 				</button>
 			</footer>
@@ -175,6 +175,7 @@ import MkUsersTooltip from '@/components/MkUsersTooltip.vue';
 import MkUrlPreview from '@/components/MkUrlPreview.vue';
 import MkInstanceTicker from '@/components/MkInstanceTicker.vue';
 import { pleaseLogin } from '@/scripts/please-login.js';
+import { focusPrev, focusNext } from '@/scripts/focus.js';
 import { checkWordMute } from '@/scripts/check-word-mute.js';
 import { userPage } from '@/filters/user.js';
 import * as os from '@/os.js';
@@ -197,7 +198,6 @@ import { showMovedDialog } from '@/scripts/show-moved-dialog.js';
 import { shouldCollapsed } from '@/scripts/collapsed.js';
 import { isEnabledUrlPreview } from '@/instance.js';
 import { type Keymap } from '@/scripts/hotkey.js';
-import { focusPrev, focusNext } from '@/scripts/focus.js';
 
 const props = withDefaults(defineProps<{
 	note: Misskey.entities.Note;
@@ -256,7 +256,6 @@ const renoteTime = shallowRef<HTMLElement>();
 const reactButton = shallowRef<HTMLElement>();
 const clipButton = shallowRef<HTMLElement>();
 const appearNote = computed(() => isRenote ? note.value.renote as Misskey.entities.Note : note.value);
-const galleryEl = shallowRef<InstanceType<typeof MkMediaList>>();
 const isMyRenote = $i && ($i.id === note.value.userId);
 const showContent = ref(false);
 const parsed = computed(() => appearNote.value.text ? mfm.parse(appearNote.value.text) : null);
@@ -318,7 +317,7 @@ const keymap = {
 	},
 	'o': () => {
 		if (renoteCollapsed.value) return;
-		galleryEl.value?.openGallery();
+		showMenu();
 	},
 	'v|enter': () => {
 		if (renoteCollapsed.value) {
@@ -419,7 +418,7 @@ function renote(viaKeyboard = false) {
 	});
 }
 
-function reply(): void {
+function reply(viaKeyboard = false): void {
 	pleaseLogin();
 	if (props.mock) {
 		return;
@@ -427,12 +426,13 @@ function reply(): void {
 	os.post({
 		reply: appearNote.value,
 		channel: appearNote.value.channel,
+		animation: !viaKeyboard,
 	}).then(() => {
 		focus();
 	});
 }
 
-function react(): void {
+function react(viaKeyboard = false): void {
 	pleaseLogin();
 	showMovedDialog();
 	if (appearNote.value.reactionAcceptance === 'likeOnly') {
@@ -519,16 +519,18 @@ function onContextmenu(ev: MouseEvent): void {
 	}
 }
 
-function showMenu(): void {
+function showMenu(viaKeyboard = false): void {
 	if (props.mock) {
 		return;
 	}
 
 	const { menu, cleanup } = getNoteMenu({ note: note.value, translating, translation, isDeleted, currentClip: currentClip?.value });
-	os.popupMenu(menu, menuButton.value).then(focus).finally(cleanup);
+	os.popupMenu(menu, menuButton.value, {
+		viaKeyboard,
+	}).then(focus).finally(cleanup);
 }
 
-async function clip(): Promise<void> {
+async function clip() {
 	if (props.mock) {
 		return;
 	}
@@ -536,7 +538,7 @@ async function clip(): Promise<void> {
 	os.popupMenu(await getNoteClipMenu({ note: note.value, isDeleted, currentClip: currentClip?.value }), clipButton.value).then(focus);
 }
 
-function showRenoteMenu(): void {
+function showRenoteMenu(viaKeyboard = false): void {
 	if (props.mock) {
 		return;
 	}
@@ -561,14 +563,18 @@ function showRenoteMenu(): void {
 			getCopyNoteLinkMenu(note.value, i18n.ts.copyLinkRenote),
 			{ type: 'divider' },
 			getUnrenote(),
-		], renoteTime.value);
+		], renoteTime.value, {
+			viaKeyboard: viaKeyboard,
+		});
 	} else {
 		os.popupMenu([
 			getCopyNoteLinkMenu(note.value, i18n.ts.copyLinkRenote),
 			{ type: 'divider' },
 			getAbuseNoteMenu(note.value, i18n.ts.reportAbuseRenote),
 			($i?.isModerator || $i?.isAdmin) ? getUnrenote() : undefined,
-		], renoteTime.value);
+		], renoteTime.value, {
+			viaKeyboard: viaKeyboard,
+		});
 	}
 }
 
@@ -581,11 +587,11 @@ function blur() {
 }
 
 function focusBefore() {
-	focusPrev(rootEl.value);
+	focusPrev(rootEl.value ?? null);
 }
 
 function focusAfter() {
-	focusNext(rootEl.value);
+	focusNext(rootEl.value ?? null);
 }
 
 function readPromo() {
@@ -623,7 +629,7 @@ function emitUpdReaction(emoji: string, delta: number) {
 	&:focus-visible {
 		outline: none;
 
-		&::after {
+		&:after {
 			content: "";
 			pointer-events: none;
 			display: block;
@@ -636,7 +642,7 @@ function emitUpdReaction(emoji: string, delta: number) {
 			margin: auto;
 			width: calc(100% - 8px);
 			height: calc(100% - 8px);
-			border: dashed 2px var(--focus);
+			border: dashed 1px var(--focus);
 			border-radius: var(--radius);
 			box-sizing: border-box;
 		}
