@@ -3,13 +3,9 @@
 services:
   redis:
     restart: always
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    networks:
-      - internal_network
+    image: redis:7-alpine
     ports:
       - "6379:6379"
-    ulimits:
-      memlock: -1
     volumes:
       - ./redis:/data
     healthcheck:

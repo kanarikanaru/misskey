@@ -15,13 +15,11 @@ services:
       - external_network
 
   redis:
-    restart: always
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    restart: unless-stopped
+    image: redis:7-alpine
     networks:
       - internal_network
-    ulimits:
-      memlock: -1
-    volumes:
+    volumes:s
       - redis-data:/data
     healthcheck:
       test: "redis-cli ping"
