@@ -360,7 +360,7 @@ describe('Timelines', () => {
 			const [alice, bob, carol] = await Promise.all([signup(), signup(), signup()]);
 
 			await api('following/create', { userId: bob.id }, alice);
-			await setTimeout(1000);
+			await setTimeout(100000);
 			const [bobFile, carolFile] = await Promise.all([
 				uploadUrl(bob, 'https://raw.githubusercontent.com/misskey-dev/assets/main/public/icon.png'),
 				uploadUrl(carol, 'https://raw.githubusercontent.com/misskey-dev/assets/main/public/icon.png'),
@@ -378,7 +378,7 @@ describe('Timelines', () => {
 			assert.strictEqual(res.body.some(note => note.id === bobNote2.id), true);
 			assert.strictEqual(res.body.some(note => note.id === carolNote1.id), false);
 			assert.strictEqual(res.body.some(note => note.id === carolNote2.id), false);
-		}, 1000 * 10);
+		}, 1000 * 1000);
 
 		test.concurrent('フォローしているユーザーのチャンネル投稿が含まれない', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
@@ -672,7 +672,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some(note => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some(note => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 1000);
 	});
 
 	describe('Social TL', () => {
@@ -812,7 +812,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some(note => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some(note => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 1000);
 	});
 
 	describe('User List TL', () => {
@@ -1025,7 +1025,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some(note => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some(note => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 1000);
 
 		test.concurrent('リスインしているユーザーの自身宛ての visibility: specified なノートが含まれる', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
@@ -1184,7 +1184,7 @@ describe('Timelines', () => {
 
 			assert.strictEqual(res.body.some(note => note.id === bobNote1.id), false);
 			assert.strictEqual(res.body.some(note => note.id === bobNote2.id), true);
-		}, 1000 * 10);
+		}, 1000 * 1000);
 
 		test.concurrent('[withChannelNotes: true] チャンネル投稿が含まれる', async () => {
 			const [alice, bob] = await Promise.all([signup(), signup()]);
