@@ -8,12 +8,13 @@ on:
     branches: [ bsk-dev ]
     paths:
       - packages/misskey-js/**
+      - .github/workflows/test-misskey-js.yml
   pull_request:
     branches: [ bsk-dev ]
     paths:
       - packages/misskey-js/**
+      - .github/workflows/test-misskey-js.yml
   workflow_dispatch:
-
 jobs:
   test:
 
@@ -31,7 +32,7 @@ jobs:
       - run: corepack enable
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'

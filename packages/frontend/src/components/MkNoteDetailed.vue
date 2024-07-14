@@ -209,7 +209,7 @@ import MkPoll from '@/components/MkPoll.vue';
 import MkUsersTooltip from '@/components/MkUsersTooltip.vue';
 import MkUrlPreview from '@/components/MkUrlPreview.vue';
 import MkInstanceTicker from '@/components/MkInstanceTicker.vue';
-import { pleaseLogin } from '@/scripts/please-login.js';
+import { pleaseLogin, type OpenOnRemoteOptions } from '@/scripts/please-login.js';
 import { checkWordMute } from '@/scripts/check-word-mute.js';
 import { userPage } from '@/filters/user.js';
 import { notePage } from '@/filters/note.js';
@@ -221,6 +221,7 @@ import { reactionPicker } from '@/scripts/reaction-picker.js';
 import { extractUrlFromMfm } from '@/scripts/extract-url-from-mfm.js';
 import { $i } from '@/account.js';
 import { i18n } from '@/i18n.js';
+import { host } from '@/config.js';
 import { getNoteClipMenu, getNoteMenu, getRenoteMenu } from '@/scripts/get-note-menu.js';
 import { useNoteCapture } from '@/scripts/use-note-capture.js';
 import { deepClone } from '@/scripts/clone.js';
@@ -294,6 +295,11 @@ const showTicker = (defaultStore.state.instanceTicker === 'always') || (defaultS
 const conversation = ref<Misskey.entities.Note[]>([]);
 const replies = ref<Misskey.entities.Note[]>([]);
 const canRenote = computed(() => ['public', 'home'].includes(appearNote.value.visibility) || appearNote.value.userId === $i?.id);
+
+const pleaseLoginContext = computed<OpenOnRemoteOptions>(() => ({
+	type: 'lookup',
+	url: `https://${host}/notes/${appearNote.value.id}`,
+}));
 
 const keymap = {
 	'r': () => reply(),
@@ -395,7 +401,7 @@ if (appearNote.value.reactionAcceptance === 'likeOnly') {
 }
 
 function renote() {
-	pleaseLogin();
+	pleaseLogin(undefined, pleaseLoginContext.value);
 	showMovedDialog();
 
 	const { menu } = getRenoteMenu({ note: note.value, renoteButton });
@@ -403,7 +409,7 @@ function renote() {
 }
 
 function reply(): void {
-	pleaseLogin();
+	pleaseLogin(undefined, pleaseLoginContext.value);
 	showMovedDialog();
 	os.post({
 		reply: appearNote.value,
@@ -414,7 +420,7 @@ function reply(): void {
 }
 
 function react(): void {
-	pleaseLogin();
+	pleaseLogin(undefined, pleaseLoginContext.value);
 	showMovedDialog();
 	if (appearNote.value.reactionAcceptance === 'likeOnly') {
 		sound.playMisskeySfx('reaction');
@@ -490,7 +496,7 @@ async function clip(): Promise<void> {
 
 function showRenoteMenu(): void {
 	if (!isMyRenote) return;
-	pleaseLogin();
+	pleaseLogin(undefined, pleaseLoginContext.value);
 	os.popupMenu([{
 		text: i18n.ts.unrenote,
 		icon: 'ti ti-trash',
