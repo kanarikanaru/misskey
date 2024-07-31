@@ -19,7 +19,7 @@ services:
     image: redis:7-alpine
     networks:
       - internal_network
-    volumes:s
+    volumes:
       - redis-data:/data
     healthcheck:
       test: "redis-cli ping"
