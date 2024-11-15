@@ -13,6 +13,7 @@ import type Logger from '@/logger.js';
 import { DriveService } from '@/core/DriveService.js';
 import { createTemp } from '@/misc/create-temp.js';
 import { UtilityService } from '@/core/UtilityService.js';
+import { NotificationService } from '@/core/NotificationService.js';
 import { bindThis } from '@/decorators.js';
 import { UserContentsExporWebhookService } from '@/core/UserContentsExporWebhookService.js';
 import { QueueLoggerService } from '../QueueLoggerService.js';
@@ -35,6 +36,7 @@ export class ExportMutingProcessorService {
 		private queueLoggerService: QueueLoggerService,
 
 		private userContentsExporWebhookService: UserContentsExporWebhookService,
+		private notificationService: NotificationService,
 	) {
 		this.logger = this.queueLoggerService.logger.createSubLogger('export-muting');
 	}
@@ -114,6 +116,11 @@ export class ExportMutingProcessorService {
 			await this.userContentsExporWebhookService.notifySystemWebhook(user, driveFile, 'muting');
 
 			this.logger.succ(`Exported to: ${driveFile.id}`);
+
+			this.notificationService.createNotification(user.id, 'exportCompleted', {
+				exportedEntity: 'muting',
+				fileId: driveFile.id,
+			});
 		} finally {
 			cleanup();
 		}

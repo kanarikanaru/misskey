@@ -14,6 +14,7 @@ import { DriveService } from '@/core/DriveService.js';
 import { createTemp } from '@/misc/create-temp.js';
 import type { MiFollowing } from '@/models/Following.js';
 import { UtilityService } from '@/core/UtilityService.js';
+import { NotificationService } from '@/core/NotificationService.js';
 import { bindThis } from '@/decorators.js';
 import { UserContentsExporWebhookService } from '@/core/UserContentsExporWebhookService.js';
 import { QueueLoggerService } from '../QueueLoggerService.js';
@@ -39,6 +40,7 @@ export class ExportFollowingProcessorService {
 		private queueLoggerService: QueueLoggerService,
 
 		private userContentsExporWebhookService: UserContentsExporWebhookService,
+		private notificationService: NotificationService,
 	) {
 		this.logger = this.queueLoggerService.logger.createSubLogger('export-following');
 	}
@@ -117,6 +119,11 @@ export class ExportFollowingProcessorService {
 			await this.userContentsExporWebhookService.notifySystemWebhook(user, driveFile, 'following');
 
 			this.logger.succ(`Exported to: ${driveFile.id}`);
+
+			this.notificationService.createNotification(user.id, 'exportCompleted', {
+				exportedEntity: 'following',
+				fileId: driveFile.id,
+			});
 		} finally {
 			cleanup();
 		}

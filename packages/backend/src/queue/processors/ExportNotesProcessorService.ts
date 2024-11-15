@@ -18,6 +18,7 @@ import { bindThis } from '@/decorators.js';
 import { DriveFileEntityService } from '@/core/entities/DriveFileEntityService.js';
 import { Packed } from '@/misc/json-schema.js';
 import { IdService } from '@/core/IdService.js';
+import { NotificationService } from '@/core/NotificationService.js';
 import { JsonArrayStream } from '@/misc/JsonArrayStream.js';
 import { FileWriterStream } from '@/misc/FileWriterStream.js';
 import { UserContentsExporWebhookService } from '@/core/UserContentsExporWebhookService.js';
@@ -115,6 +116,7 @@ export class ExportNotesProcessorService {
 		private idService: IdService,
 
 		private userContentsExporWebhookService: UserContentsExporWebhookService,
+		private notificationService: NotificationService,
 	) {
 		this.logger = this.queueLoggerService.logger.createSubLogger('export-notes');
 	}
@@ -154,6 +156,11 @@ export class ExportNotesProcessorService {
 			await this.userContentsExporWebhookService.notifySystemWebhook(user, driveFile, 'notes');
 
 			this.logger.succ(`Exported to: ${driveFile.id}`);
+
+			this.notificationService.createNotification(user.id, 'exportCompleted', {
+				exportedEntity: 'note',
+				fileId: driveFile.id,
+			});
 		} finally {
 			cleanup();
 		}

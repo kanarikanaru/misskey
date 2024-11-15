@@ -16,6 +16,10 @@ export const systemWebhookEventTypes = [
 	'userCreated',
 	// 	ユーザーのエクスポートが完了した時
 	'exportCompleted',
+	// モデレータが一定期間不在である警告
+	'inactiveModeratorsWarning',
+	// モデレータが一定期間不在のためシステムにより招待制へと変更された
+	'inactiveModeratorsInvitationOnlyChanged',
 ] as const;
 export type SystemWebhookEventType = typeof systemWebhookEventTypes[number];
 
