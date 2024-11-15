@@ -167,7 +167,6 @@ function toPackedNote(note: MiNote, detail = true, override?: Packed<'Note'>): P
 		reactionAcceptance: note.reactionAcceptance,
 		reactionEmojis: {},
 		reactions: {},
-		reactionCount: 0,
 		renoteCount: note.renoteCount,
 		repliesCount: note.repliesCount,
 		uri: note.uri ?? undefined,
